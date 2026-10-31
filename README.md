@@ -13,7 +13,6 @@
   <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" />
   <img src="https://img.shields.io/badge/EfficientNet--B0-FF6F00?style=flat-square" />
   <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" />
-  <img src="https://img.shields.io/badge/Anthropic-191919?style=flat-square" />
   <img src="https://img.shields.io/badge/Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white" />
 </p>
 
@@ -45,7 +44,7 @@ The machine-learning component uses EfficientNet-B0 with transfer learning to cl
 - ☁️ **Weather-Aware Suggestions**: Outfit recommendations adapt to current weather conditions.
 - 🎀 **Occasion-Based Styling**: Get outfit ideas suited to different occasions and style preferences.
 - 🦋 **Mira, AI Stylist Chatbot**: An LLM-powered conversational stylist for fashion guidance and outfit ideas.
-  - Supports both Anthropic and Gemini as LLM providers.
+  - Uses Google Gemini as its LLM provider.
   - Can use the user's wardrobe context when enabled.
   - Handles natural-language requests, such as "something comfortable for a wedding in winter."
 - 🌷 **Outfit History and Saved Looks**: Track outfit choices and save or rate preferred combinations.
@@ -114,7 +113,7 @@ Protects all routes     MongoDB Data     Context & Preferences                  
                                          Outfit Generation                    │
                                                   │                           │
                                        Recommended Outfits                    │
-                                                                   Anthropic / Gemini
+                                                                       Gemini
 ```
 
 ## 📁 Directory Layout
