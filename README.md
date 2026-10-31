@@ -28,9 +28,9 @@
 
 ---
 
-## 🌼 What is Vest IQ?
+## 🌼 What is VestiQ?
 
-**Vest IQ** is an intelligent wardrobe and outfit recommendation web application, designed to make everyday outfit selection easier, more personal, and a little more stylish. 🌸
+**VestiQ** is an intelligent wardrobe and outfit recommendation web application, designed to make everyday outfit selection easier, more personal, and a little more stylish. 🌸
 
 Build a digital wardrobe by adding clothing items, sort them into categories, and explore outfit combinations. The recommendation system considers wardrobe availability along with weather, occasion, style, and clothing choices. 🌺
 
@@ -92,7 +92,7 @@ The machine-learning component uses EfficientNet-B0 with transfer learning to cl
 ## 🌿 Architecture Overview
 
 ```text
-                                     VEST IQ
+                                     VESTiQ
                                         │
                                   User Interface
                                         │
@@ -119,7 +119,7 @@ Protects all routes     MongoDB Data     Context & Preferences                  
 ## 📁 Directory Layout
 
 ```text
-VestIQ/
+VestiQ/
 │
 ├── ai/                                  # Machine-learning pipeline
 │   ├── dataset/
@@ -342,6 +342,6 @@ For complete terms and conditions, refer to the [LICENSE](LICENSE) file.
 
 🌸 🌷 🌼 🌿 🌺 🦋 🌹 🍃 🌸
 
-**🌸 Vest IQ — Your wardrobe. Your style. Smarter outfit decisions. 🌸**
+**🌸 VestiQ — Your wardrobe. Your style. Smarter outfit decisions. 🌸**
 
 </div>
