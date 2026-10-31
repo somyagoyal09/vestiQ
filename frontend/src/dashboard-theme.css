@@ -1,0 +1,342 @@
+/* Vestiq — logged-in dashboard theme.
+   Everything is scoped to .vestiq-app / .vq-* so the landing, login and setup pages are untouched. */
+
+/* ---------- Shell ---------- */
+.vestiq-app.bg-light{
+  position:relative;isolation:isolate;color:#2b1930;
+  font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(ellipse 60% 45% at 8% 0%,rgba(232,150,214,.28),transparent 62%),
+    radial-gradient(ellipse 55% 50% at 100% 18%,rgba(176,140,245,.26),transparent 60%),
+    radial-gradient(ellipse 70% 55% at 50% 110%,rgba(214,120,190,.22),transparent 65%),
+    linear-gradient(180deg,#1d0f24 0%,#2a1533 52%,#1a0d20 100%)!important;
+  background-attachment:fixed!important;
+}
+.vestiq-app ::selection{background:rgba(232,181,255,.45);color:#fff}
+.vestiq-app main.container{padding-top:2.25rem!important;padding-bottom:4.5rem!important}
+
+/* ---------- Navigation ---------- */
+.vestiq-app .vq-nav{
+  background:rgba(24,12,30,.78)!important;border-bottom:1px solid rgba(239,179,214,.2)!important;
+  backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:0 12px 40px rgba(8,2,12,.35);padding:12px 0;
+}
+.vq-brand{display:inline-flex;align-items:center;gap:11px;border:0;background:none;padding:0;margin-right:14px;color:#fff;cursor:pointer;transition:transform .25s ease}
+.vq-brand:hover{transform:scale(1.03)}
+.vq-brand:focus-visible{outline:2px solid #e8b5ff;outline-offset:4px;border-radius:14px}
+.vq-brand-icon{width:46px;height:46px;flex:0 0 46px;display:block;object-fit:cover;border-radius:13px;border:2px solid rgba(255,255,255,.95);box-shadow:0 4px 20px rgba(0,0,0,.35),0 0 16px rgba(255,200,240,.25)}
+.vq-wordmark{font-family:"Playfair Display",Georgia,serif;font-size:38px;font-weight:800;letter-spacing:-2px;line-height:1;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.3)}
+.vq-wordmark>span{color:#e6b9ff;font-style:italic}
+.vq-wordmark>i{color:#f1a9d1;font-style:normal;font-size:15px;margin-left:2px;vertical-align:top}
+
+.vestiq-app .vq-nav .btn-sm{border-radius:999px;padding:8px 16px;font-size:14px;font-weight:700;border:1px solid transparent;transition:background .2s ease,color .2s ease,transform .2s ease,box-shadow .2s ease}
+.vestiq-app .vq-nav .btn-outline-secondary{background:transparent;color:rgba(255,255,255,.8)}
+.vestiq-app .vq-nav .btn-outline-secondary:hover{background:rgba(232,181,255,.16);color:#fff;transform:translateY(-1px)}
+.vestiq-app .vq-nav .btn-dark,.vestiq-app .vq-nav .btn-dark:hover{box-shadow:0 8px 24px rgba(214,140,225,.4)}
+.vestiq-app .vq-nav .btn-outline-dark{background:rgba(30,17,34,.4);color:#fff;border-color:rgba(240,190,225,.7)}
+.vestiq-app .vq-nav .btn-outline-dark:hover{background:rgba(235,177,222,.24);transform:translateY(-1px);box-shadow:0 8px 22px rgba(210,145,220,.25)}
+.vestiq-app .vq-nav .btn-link.text-danger{color:#ff9ec6!important;text-decoration:none;font-weight:700}
+.vestiq-app .vq-nav .btn-link.text-danger:hover{color:#ffc2dc!important;text-decoration:underline}
+.vestiq-app .vq-nav .btn:focus-visible{outline:2px solid #e8b5ff;outline-offset:2px;box-shadow:none}
+
+/* ---------- Text on the dark page ---------- */
+.vestiq-app .text-muted{color:#d8c3de!important}
+.vestiq-app :is(.card,.vd-card,.vestiq-mood-card,.vestiq-review-card,.duplicate-modal) .text-muted{color:#806b82!important}
+.vestiq-app main.vq-view-stylist .text-muted{color:#806b82!important}
+.vestiq-app .vq-view:not(.vq-view-stylist) h1:not(.vd-title){
+  font-family:"Playfair Display",Georgia,serif;font-weight:600!important;color:#fff;
+  font-size:clamp(36px,4.4vw,58px);letter-spacing:-1.4px;line-height:1.02;
+}
+.vestiq-app .vq-view:not(.vq-view-stylist) h1:not(.vd-title)::after{
+  content:"";display:block;width:68px;height:3px;margin-top:14px;border-radius:999px;
+  background:linear-gradient(90deg,#efb3d6,#e8b5ff);box-shadow:0 0 12px rgba(232,181,255,.45);
+}
+.vestiq-app main>h4,.vestiq-app .vd-section-title{
+  font-family:"Playfair Display",Georgia,serif;font-weight:600!important;font-size:28px;color:#fff;letter-spacing:-.4px;
+}
+.vestiq-app main>h4::before{content:"✦";color:#efb3d6;font-size:.55em;margin-right:10px;vertical-align:middle}
+.vestiq-app .text-danger{color:#ff9ec6!important}
+
+/* ---------- Alerts ---------- */
+.vestiq-app .alert-secondary,.vestiq-app .alert-light{
+  background:rgba(255,255,255,.07);color:#f1e2f4;border:1px solid rgba(239,179,214,.28)!important;
+  border-radius:16px;backdrop-filter:blur(8px);
+}
+
+/* ---------- Buttons ---------- */
+.vestiq-app .btn{transition:transform .2s ease,box-shadow .2s ease,background .2s ease,color .2s ease}
+.vestiq-app .btn-dark,.vestiq-app .btn-dark:hover,.vestiq-app .btn-dark:focus,.vestiq-app .btn-dark:active,.vestiq-app .btn-dark.active{
+  background:linear-gradient(95deg,#e8a8dc,#c9a6f6)!important;color:#24152a!important;border:1px solid rgba(255,235,248,.7);
+  font-weight:800;border-radius:999px;box-shadow:0 10px 26px rgba(176,110,200,.35);
+}
+.vestiq-app .btn-dark:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 14px 34px rgba(194,126,222,.5)}
+.vestiq-app .btn-dark:disabled{opacity:.55;box-shadow:none}
+.vestiq-app .btn-outline-dark,.vestiq-app .btn-outline-secondary{
+  border-radius:999px;font-weight:700;background:rgba(255,255,255,.07);color:#f6e4f7;border:1px solid rgba(239,179,214,.45);
+}
+.vestiq-app .btn-outline-dark:hover,.vestiq-app .btn-outline-secondary:hover{background:rgba(232,181,255,.2);color:#fff;border-color:rgba(245,195,230,.8);transform:translateY(-1px)}
+.vestiq-app :is(.card,.vestiq-mood-card,.vestiq-review-card,.duplicate-modal) :is(.btn-outline-dark,.btn-outline-secondary){
+  background:#fff;color:#4b2a52;border-color:#dcc3e2;
+}
+.vestiq-app :is(.card,.vestiq-mood-card,.vestiq-review-card,.duplicate-modal) :is(.btn-outline-dark,.btn-outline-secondary):hover{background:#f7ebfa;color:#2b1930;border-color:#c58bcf}
+.vestiq-app .btn:focus-visible{outline:2px solid #e8b5ff;outline-offset:2px;box-shadow:none}
+.vestiq-app .badge.bg-dark{background:linear-gradient(100deg,#3a1d42,#5d2d66)!important;color:#f8d9f3;border:1px solid rgba(239,179,214,.4);padding:.5em .85em;border-radius:999px;letter-spacing:.3px}
+
+/* ---------- Cards, forms ---------- */
+.vestiq-app .card{
+  border:1px solid rgba(255,255,255,.55)!important;border-radius:24px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,250,255,.98),rgba(246,237,252,.96));
+  box-shadow:0 20px 50px rgba(8,2,12,.38)!important;
+}
+.vestiq-app .row>[class*="col-"]>.card.h-100{transition:transform .28s ease,box-shadow .28s ease}
+.vestiq-app .row>[class*="col-"]>.card.h-100:hover{transform:translateY(-6px);box-shadow:0 28px 60px rgba(8,2,12,.5),0 0 34px rgba(226,157,224,.25)!important}
+.vestiq-app .card h4,.vestiq-app .card h5{font-family:"Playfair Display",Georgia,serif;font-weight:600!important;color:#2b1930}
+.vestiq-app .form-control,.vestiq-app .form-select{border:1px solid #e4cfe8;border-radius:14px;padding:.7rem .9rem;background-color:#fff;color:#2b1930}
+.vestiq-app .form-control:focus,.vestiq-app .form-select:focus{border-color:#c58bcf;box-shadow:0 0 0 4px rgba(197,139,207,.22)}
+.vestiq-app .form-control::file-selector-button{background:#f3e6f6;color:#4b2a52;border:0;border-right:1px solid #e4cfe8;font-weight:700}
+.vestiq-app .form-label{font-weight:700;color:#4b3450}
+
+/* ---------- Home dashboard ---------- */
+.vestiq-app .vestiq-dashboard{padding-top:0}
+.vestiq-app .vd-hero{
+  border:1px solid rgba(239,179,214,.28);border-radius:34px;padding:clamp(28px,4vw,54px);
+  background:
+    radial-gradient(circle at 88% 8%,rgba(232,181,255,.4),transparent 36%),
+    radial-gradient(circle at 6% 105%,rgba(240,160,205,.3),transparent 42%),
+    linear-gradient(135deg,#2c1733,#47244d 60%,#3a1d44);
+  box-shadow:0 30px 80px rgba(8,2,12,.5),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.vestiq-app .vd-hero:after{width:280px;height:280px;right:-90px;bottom:-130px;background:rgba(232,181,255,.14);filter:blur(6px)}
+.vestiq-app .vd-kicker{color:#efb3d6;letter-spacing:4px;font-size:12px}
+.vestiq-app .vd-title{font-family:"Playfair Display",Georgia,serif;font-weight:600;color:#fff;font-size:clamp(38px,5vw,70px);letter-spacing:-1.8px;line-height:1;text-shadow:0 3px 18px rgba(0,0,0,.4)}
+.vestiq-app .vd-title em{font-weight:600;background:linear-gradient(90deg,#f5b6de,#d6b8ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.vestiq-app .vd-sub{color:#e8d6ec;font-size:17px}
+.vestiq-app .vd-style-btn{border:1px solid rgba(255,235,248,.8);border-radius:999px;padding:15px 28px;background:linear-gradient(90deg,#e6a9df,#c7a4f5);color:#24152a;font-size:17px;box-shadow:0 12px 38px rgba(155,92,182,.5)}
+.vestiq-app .vd-style-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 18px 46px rgba(194,126,222,.65)}
+
+.vestiq-app .vd-grid{gap:18px;margin-top:20px}
+.vestiq-app .vd-card{position:relative;overflow:hidden;border-radius:26px;padding:26px;min-height:190px;border:1px solid rgba(255,255,255,.55);box-shadow:0 20px 50px rgba(8,2,12,.38);background:linear-gradient(160deg,#fffaff,#f6edfc)}
+.vestiq-app .vd-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--acc,linear-gradient(90deg,#efb3d6,#e8b5ff))}
+.vestiq-app .vd-grid .vd-card:nth-child(1){--acc:linear-gradient(90deg,#f3a3cc,#f9c9e0);background:linear-gradient(160deg,#fff5fa,#fbe2f0)}
+.vestiq-app .vd-grid .vd-card:nth-child(2){--acc:linear-gradient(90deg,#c4a0f5,#e5ccff);background:linear-gradient(160deg,#fbf7ff,#eadffc)}
+.vestiq-app .vd-grid .vd-card:nth-child(3){--acc:linear-gradient(90deg,#e8b5ff,#a8b8f8);background:linear-gradient(160deg,#fbf8ff,#ece4f8)}
+.vestiq-app .vd-card:hover{transform:translateY(-5px);box-shadow:0 28px 60px rgba(8,2,12,.5),0 0 34px rgba(226,157,224,.25)}
+.vestiq-app .vd-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9a639f;font-weight:800}
+.vestiq-app .vd-value{font-family:"Playfair Display",Georgia,serif;font-size:32px;font-weight:600;letter-spacing:-.6px;color:#2b1930}
+.vestiq-app .vd-action{border-radius:999px;padding:9px 16px;border:1px solid #d9bfe0;background:#fff;color:#4b2a52;transition:.2s}
+.vestiq-app .vd-action:hover{background:#f7ebfa;border-color:#c58bcf;transform:translateY(-1px)}
+.vestiq-app .vd-action:focus-visible{outline:2px solid #b27ac2;outline-offset:2px}
+.vestiq-app .vd-flow{margin-top:20px;border-radius:28px;padding:26px 30px;border:1px solid rgba(239,179,214,.24);background:linear-gradient(120deg,rgba(66,33,76,.75),rgba(38,19,46,.78));backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(8,2,12,.4)}
+.vestiq-app .vd-flow-title{font-family:"Playfair Display",Georgia,serif;font-size:24px;font-weight:600}
+.vestiq-app .vd-flow-copy{color:#dcc9e0}
+.vestiq-app .vd-step{padding:9px 14px;border-color:rgba(239,179,214,.3);background:rgba(232,181,255,.08);transition:.2s}
+.vestiq-app .vd-step:hover{background:rgba(232,181,255,.2);transform:translateY(-2px)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:575px){
+  .vq-wordmark{font-size:30px}.vq-brand-icon{width:38px;height:38px;flex-basis:38px;border-radius:10px}
+  .vestiq-app .vd-flow{padding:22px}
+}
+@media(prefers-reduced-motion:reduce){.vestiq-app *{transition:none!important;animation:none!important}}
+
+/* ================= Phase 2 ================= */
+.vestiq-app{overflow-x:clip}
+.vestiq-app .vq-nav .container{max-width:1320px}
+.vq-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0 11px;border-radius:14px;border:1px solid rgba(240,190,225,.6);background:rgba(30,17,34,.4);cursor:pointer}
+.vq-burger span{display:block;height:2px;border-radius:2px;background:#fff;transition:transform .2s ease,opacity .2s ease}
+.vq-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.vq-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.vq-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.vq-burger:focus-visible{outline:2px solid #e8b5ff;outline-offset:2px}
+@media(max-width:1180px){
+  .vestiq-app .vq-nav .container{flex-wrap:wrap!important;justify-content:space-between}
+  .vq-burger{display:flex}
+  .vestiq-app .vq-menu{display:none!important;width:100%;order:3;flex-direction:column;align-items:stretch;gap:6px!important;padding:12px 0 6px;margin-top:10px;border-top:1px solid rgba(239,179,214,.2)}
+  .vestiq-app .vq-menu.open{display:flex!important}
+  .vestiq-app .vq-menu .btn{width:100%;text-align:left;padding:11px 16px}
+  .vestiq-app .vq-menu .vq-username{display:block!important;padding:6px 16px}
+}
+
+/* Wardrobe card actions */
+.vq-actions .vq-act{min-height:42px;padding:9px 16px;font-size:14px;border-radius:999px;font-weight:800;line-height:1.2}
+.vq-actions .vq-act-worn{flex:1 1 150px}
+.vq-actions .vq-act-undo{flex:1 1 150px}
+.vq-actions .vq-act-del{flex:0 0 auto}
+.vestiq-app .card .vq-act-worn{background:#f6ecfb;color:#5b2f66;border:1px solid #d3b1e3}
+.vestiq-app .card .vq-act-worn:hover{background:linear-gradient(95deg,#f1c4e6,#dcc5fa);color:#2b1930;border-color:#c58bcf;transform:translateY(-1px)}
+.vestiq-app .card .vq-act-del{background:transparent;color:#a8466f;border:1px solid #ebc3d3}
+.vestiq-app .card .vq-act-del:hover{background:#fdecf3;color:#8f2f58;border-color:#d98aa9;transform:none}
+.vestiq-app .vq-act:focus-visible{outline:2px solid #b27ac2;outline-offset:2px}
+
+/* Style Me */
+.vq-kicker{font-size:12px;font-weight:800;letter-spacing:4px;color:#efb3d6;margin-bottom:8px}
+.vq-style-form{border-radius:28px!important;position:relative}
+.vq-style-form::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#f3a3cc,#c9a6f6,#a8b8f8)}
+.vq-style-form .card-body{padding:1.6rem}
+.vq-style-form .form-label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#7c4d86}
+.vq-style-form .row>div:nth-child(1) .form-label::before{content:"01 · ";color:#d28bc6}
+.vq-style-form .row>div:nth-child(2) .form-label::before{content:"02 · ";color:#d28bc6}
+.vq-style-form .row>div:nth-child(3) .form-label::before{content:"03 · ";color:#d28bc6}
+.vq-style-form .form-control,.vq-style-form .form-select{min-height:50px}
+.vq-state .card-body{padding:3rem 1.5rem!important}
+.vq-state-title{font-family:"Playfair Display",Georgia,serif;font-size:26px;font-weight:600;color:#2b1930;margin-bottom:6px}
+.vq-spinner{display:block;width:34px;height:34px;margin:0 auto 16px;border-radius:50%;border:3px solid #ecd6f2;border-top-color:#c27bd0;animation:vqspin .8s linear infinite}
+@keyframes vqspin{to{transform:rotate(360deg)}}
+.vq-dev-note{margin:0 0 12px;font-size:11px;color:rgba(216,195,222,.55)}
+
+/* General responsiveness */
+.vestiq-app img,.vestiq-app video{max-width:100%}
+@media(max-width:767px){
+  .vestiq-app main.container{padding-left:16px;padding-right:16px}
+  .vestiq-app .vd-hero{padding:26px 22px}
+  .vestiq-app .vd-style-btn{width:100%}
+  .vestiq-app .d-flex.justify-content-between.align-items-end>.btn{align-self:flex-start}
+}
+
+/* Floating style buddy */
+.vq-weather-err{text-transform:none!important;letter-spacing:0!important;color:#a8466f!important;font-weight:600!important;margin-bottom:8px}
+.vq-chat-root{position:fixed;right:22px;bottom:22px;z-index:1500;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.vq-chat-fab{width:66px;height:66px;border-radius:50%;border:1px solid rgba(255,255,255,.55);cursor:pointer;display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 24%,#ffd6f0 0%,#e79bd8 38%,#a56ad6 78%,#6e3a9c 100%);
+  box-shadow:0 18px 36px rgba(60,20,80,.5),0 0 28px rgba(226,150,224,.5),inset 0 3px 6px rgba(255,255,255,.6),inset 0 -8px 14px rgba(70,20,100,.4);
+  animation:vqFloat 4.5s ease-in-out infinite;transition:transform .2s ease,box-shadow .2s ease}
+.vq-chat-fab:hover{transform:translateY(-4px) scale(1.06);box-shadow:0 24px 44px rgba(60,20,80,.55),0 0 40px rgba(226,150,224,.65),inset 0 3px 6px rgba(255,255,255,.6),inset 0 -8px 14px rgba(70,20,100,.4)}
+.vq-chat-fab:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@keyframes vqFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.vq-chat-tip{position:relative;max-width:250px;padding:12px 30px 12px 14px;border-radius:18px 18px 4px 18px;font-size:13px;font-weight:700;line-height:1.35;color:#2b1930;
+  background:linear-gradient(145deg,#fffaff,#f4e6fb);border:1px solid rgba(255,255,255,.7);box-shadow:0 14px 34px rgba(8,2,12,.45);animation:vqTip .4s ease both .6s}
+@keyframes vqTip{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.vq-chat-tip button{position:absolute;right:6px;top:4px;border:0;background:none;color:#8b6d90;font-size:18px;cursor:pointer;line-height:1}
+.vq-chat-panel{width:min(410px,calc(100vw - 24px));height:min(580px,72vh);display:flex;flex-direction:column;overflow:hidden;border-radius:26px;
+  background:#fbf6fd;border:1px solid rgba(255,255,255,.6);box-shadow:0 30px 80px rgba(8,2,12,.6),0 0 40px rgba(226,157,224,.25);animation:vqTip .25s ease both}
+.vq-chat-panel[hidden],.vq-chat-body[hidden]{display:none}
+.vq-chat-panel.is-min{height:auto}
+.vq-chat-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;color:#fff;background:linear-gradient(120deg,#2c1733,#5a2c63)}
+.vq-chat-title{display:flex;align-items:center;gap:10px}
+.vq-chat-title strong{display:block;font-family:"Playfair Display",Georgia,serif;font-size:18px;font-weight:600;line-height:1.1}
+.vq-chat-title small{color:#e6b9ff;font-size:11px;letter-spacing:.5px}
+.vq-chat-avatar{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:"Playfair Display",Georgia,serif;font-size:19px;font-weight:700;color:#fff;background:radial-gradient(circle at 32% 24%,#ffe3f5,#f0a6dc 35%,#a56ad6 80%);border:1px solid rgba(255,255,255,.55);box-shadow:0 0 14px rgba(236,150,225,.55),inset 0 2px 3px rgba(255,255,255,.6)}
+.vq-chat-controls{display:flex;gap:6px}
+.vq-chat-controls button{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:18px;line-height:1;cursor:pointer}
+.vq-chat-controls button:hover{background:rgba(255,255,255,.22)}
+.vq-chat-controls button:focus-visible{outline:2px solid #e8b5ff;outline-offset:2px}
+.vq-chat-body{flex:1;min-height:0;overflow-y:auto;padding:10px;color:#2b1930}
+.vq-chat-body h1{font-size:26px!important;margin:0 0 6px!important}
+.vq-chat-body .container{padding-left:0;padding-right:0}
+@media(max-width:575px){.vq-chat-root{right:12px;bottom:12px}.vq-chat-panel{width:calc(100vw - 24px);height:min(78vh,600px)}}
+@media(prefers-reduced-motion:reduce){.vq-chat-fab{animation:none}}
+
+/* Chat panel: tighter size + no text overflow */
+.vq-chat-panel{width:min(380px,calc(100vw - 24px));height:min(520px,68vh)}
+.vq-chat-body{overscroll-behavior:contain}
+@media(max-width:575px){.vq-chat-panel{width:calc(100vw - 24px);height:min(74vh,560px)}}
+
+/* ================= Cloud mood popup ================= */
+.vestiq-mood-overlay{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;
+  background:radial-gradient(circle at 15% 12%,rgba(236,150,214,.34),transparent 38%),radial-gradient(circle at 88% 18%,rgba(160,140,250,.32),transparent 40%),radial-gradient(circle at 62% 96%,rgba(110,160,240,.26),transparent 44%),rgba(22,9,29,.93);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);animation:vqFade .3s ease backwards}
+@keyframes vqFade{from{opacity:0}}
+.vestiq-mood-card{position:relative;width:min(1000px,100%);margin:auto;padding:8px 0 4px;color:#fff;font-family:"DM Sans",system-ui,sans-serif}
+.vd-mood-close{position:absolute;right:0;top:0;z-index:3;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:24px;line-height:1;cursor:pointer;backdrop-filter:blur(8px);transition:transform .25s ease,background .2s ease}
+.vd-mood-close:hover{background:rgba(255,255,255,.22);transform:rotate(90deg)}
+.vd-mood-close:focus-visible,.vd-mood-skip:focus-visible{outline:2px solid #f0c6ff;outline-offset:3px}
+
+.vd-moods{display:grid;gap:18px 22px;align-items:center;margin:0;padding:34px 0 0;
+  grid-template-columns:1fr 1.5fr 1fr;grid-template-areas:"a b c" "d x e" "f g h";padding-top:56px}
+.vq-cloud-main{grid-area:x;position:relative;min-height:320px;display:grid;place-items:center;filter:drop-shadow(0 24px 40px rgba(0,0,0,.4)) drop-shadow(0 0 40px rgba(236,170,230,.35));animation:vqPop .6s cubic-bezier(.2,.9,.25,1) backwards,vqBobSlow 9s ease-in-out infinite}
+.vq-cloud-svg{position:absolute;inset:0;width:100%;height:100%}
+.vq-cloud-copy{position:relative;text-align:center;padding:58px 19% 46px;color:#2e1835}
+.vd-mood-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#a0629f;margin-bottom:8px}
+.vd-mood-eyebrow::before{content:"✦ ";color:#e08fc9}
+.vd-mood-title{margin:0;font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:clamp(26px,3.2vw,38px);letter-spacing:-1px;line-height:1.05;color:#2e1835}
+.vd-mood-copy{margin:9px 0 0;font-size:13px;line-height:1.4;color:#6f5873}
+
+.vd-mood-option{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;text-align:left;width:100%;max-width:270px;justify-self:center;min-height:112px;padding:16px 26px;color:#fff;cursor:pointer;
+  border:1px solid rgba(255,255,255,.26);border-radius:58% 42% 55% 45% / 62% 56% 44% 38%;
+  background:linear-gradient(145deg,rgba(255,255,255,.2),rgba(255,255,255,.07));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 14px 34px rgba(8,2,14,.4),inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;
+  animation:vqPop .55s cubic-bezier(.2,.9,.25,1) backwards,vqBob 6s ease-in-out infinite}
+.vd-mood-option:nth-child(2){grid-area:a;border-radius:46% 54% 40% 60% / 58% 44% 56% 42%;animation-delay:.06s,0s}
+.vd-mood-option:nth-child(3){grid-area:b;border-radius:58% 42% 55% 45% / 50% 60% 40% 50%;animation-delay:.1s,-1.4s}
+.vd-mood-option:nth-child(4){grid-area:c;border-radius:42% 58% 46% 54% / 56% 42% 58% 44%;animation-delay:.14s,-2.8s}
+.vd-mood-option:nth-child(5){grid-area:d;border-radius:54% 46% 60% 40% / 44% 58% 42% 56%;animation-delay:.18s,-4.2s}
+.vd-mood-option:nth-child(6){grid-area:e;border-radius:44% 56% 42% 58% / 60% 44% 56% 40%;animation-delay:.22s,-.7s}
+.vd-mood-option:nth-child(7){grid-area:f;border-radius:56% 44% 50% 50% / 46% 58% 42% 54%;animation-delay:.26s,-2s}
+.vd-mood-option:nth-child(8){grid-area:g;border-radius:48% 52% 44% 56% / 58% 46% 54% 42%;animation-delay:.3s,-3.4s}
+.vd-mood-option:nth-child(9){grid-area:h;border-radius:52% 48% 58% 42% / 44% 60% 40% 56%;animation-delay:.34s,-5s}
+@keyframes vqPop{from{opacity:0;scale:.82}}
+@keyframes vqBob{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@keyframes vqBobSlow{0%,100%{translate:0 0}50%{translate:0 -4px}}
+.vd-mood-option:hover{transform:scale(1.05);background:linear-gradient(145deg,rgba(255,255,255,.3),rgba(255,255,255,.12));border-color:rgba(255,220,245,.6);box-shadow:0 18px 40px rgba(8,2,14,.45),0 0 30px rgba(236,170,230,.3),inset 0 1px 0 rgba(255,255,255,.45)}
+.vd-mood-option:active{transform:scale(.98)}
+.vd-mood-option:focus-visible{outline:2px solid #f0c6ff;outline-offset:3px}
+.vd-mood-option.selected{border-color:rgba(255,215,245,.9);background:linear-gradient(145deg,rgba(246,170,225,.5),rgba(170,150,250,.42));box-shadow:0 0 0 2px rgba(255,205,240,.55),0 0 42px rgba(240,160,225,.6),0 16px 36px rgba(8,2,14,.45),inset 0 1px 0 rgba(255,255,255,.5)}
+.vd-mood-option.selected::after{content:"✓";position:absolute;right:12px;top:10px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;color:#5a2a63;background:linear-gradient(135deg,#fff,#ffd6f1);box-shadow:0 4px 12px rgba(240,160,225,.6);animation:vqCheck .35s cubic-bezier(.2,1.4,.3,1) backwards}
+@keyframes vqCheck{from{scale:0}}
+.vd-mood-emoji{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:21px;background:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.vd-mood-text{display:flex;flex-direction:column;min-width:0;padding-right:14px}
+.vd-mood-name{font-size:14.5px;font-weight:800;line-height:1.2;color:#fff}
+.vd-mood-desc{margin-top:3px;font-size:11.5px;line-height:1.3;color:rgba(255,255,255,.76)}
+
+.vd-mood-footer{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:26px;font-size:12px;color:rgba(255,255,255,.7)}
+.vd-mood-footer>span::before{content:"✦ ";color:#f0a3d6}
+.vd-mood-skip{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s ease,transform .2s ease}
+.vd-mood-skip:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+
+@media(max-width:860px){
+  .vd-moods{grid-template-columns:1fr 1fr;grid-template-areas:"x x" "a b" "c d" "e f" "g h";gap:12px;padding-top:44px}
+  .vq-cloud-main{min-height:250px}
+  .vq-cloud-copy{padding:46px 15% 38px}
+  .vd-mood-option{min-height:86px;padding:10px 18px;gap:10px;max-width:none;justify-content:flex-start}
+  .vd-moods{padding-top:50px}
+  .vd-mood-emoji{width:38px;height:38px;font-size:18px}
+  .vd-mood-name{font-size:13.5px}
+  .vd-mood-desc{font-size:11px}
+  .vd-mood-text{padding-right:10px}
+  .vd-mood-footer{flex-direction:column;gap:10px;margin-top:18px;text-align:center}
+}
+@media(max-width:430px){
+  .vestiq-mood-overlay{padding:12px}
+  .vd-moods{gap:10px}
+  .vq-cloud-copy{padding:22px 12%}
+  .vd-mood-title{font-size:25px}
+  .vd-mood-option{padding:8px 10px;min-height:76px}
+  .vd-mood-emoji{width:34px;height:34px;font-size:16px}
+  .vd-mood-desc{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+@media(prefers-reduced-motion:reduce){.vestiq-mood-overlay,.vd-mood-option,.vq-cloud-main{animation:none!important}.vd-mood-option:hover{transform:none}.vd-mood-close:hover{transform:none}}
+
+/* ================= Glossy chat orb ================= */
+.vq-orb-wrap{position:relative;width:78px;height:78px}
+.vq-chat-fab{position:relative;width:74px;height:74px;border-radius:50%;border:1px solid rgba(255,255,255,.6);cursor:pointer;display:grid;place-items:center;overflow:visible;
+  background:radial-gradient(circle at 32% 24%,#ffe3f5 0%,#f0a6dc 30%,#b77ae0 68%,#6f3da6 100%);
+  box-shadow:0 20px 40px rgba(50,15,75,.55),0 0 34px rgba(230,150,230,.55),inset 0 4px 8px rgba(255,255,255,.65),inset 0 -10px 18px rgba(70,20,110,.45);
+  animation:vqFloat 4.5s ease-in-out infinite,vqGlow 3.2s ease-in-out infinite}
+.vq-chat-fab::before{content:"";position:absolute;left:14%;top:8%;width:52%;height:34%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));transform:rotate(-18deg);pointer-events:none}
+.vq-chat-fab svg{position:relative;filter:drop-shadow(0 2px 4px rgba(70,20,110,.45))}
+@keyframes vqGlow{0%,100%{box-shadow:0 20px 40px rgba(50,15,75,.55),0 0 28px rgba(230,150,230,.45),inset 0 4px 8px rgba(255,255,255,.65),inset 0 -10px 18px rgba(70,20,110,.45)}50%{box-shadow:0 20px 40px rgba(50,15,75,.55),0 0 46px rgba(240,170,240,.8),inset 0 4px 8px rgba(255,255,255,.65),inset 0 -10px 18px rgba(70,20,110,.45)}}
+.vq-orb-bubble{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 30% 28%,#fff,rgba(246,190,235,.9) 45%,rgba(180,140,240,.8));box-shadow:0 0 12px rgba(236,170,230,.7);animation:vqBobSmall 5s ease-in-out infinite}
+.vq-orb-bubble.b1{width:14px;height:14px;left:-14px;top:2px}
+.vq-orb-bubble.b2{width:9px;height:9px;left:-4px;top:-14px;animation-delay:-1.6s}
+.vq-orb-bubble.b3{width:11px;height:11px;right:-6px;top:-10px;animation-delay:-3s}
+@keyframes vqBobSmall{0%,100%{translate:0 0}50%{translate:0 -8px}}
+.vq-orb-hint{position:absolute;right:0;bottom:calc(100% + 12px);width:max-content;max-width:230px;padding:10px 14px;border-radius:16px 16px 4px 16px;font-size:13px;font-weight:700;line-height:1.3;color:#2b1930;
+  background:linear-gradient(145deg,#fffaff,#f4e6fb);border:1px solid rgba(255,255,255,.75);box-shadow:0 14px 34px rgba(8,2,12,.45);opacity:0;transform:translateY(6px);pointer-events:none;
+  animation:vqHintIntro 7s ease .8s both;transition:opacity .2s ease,transform .2s ease}
+@keyframes vqHintIntro{0%{opacity:0;transform:translateY(6px)}8%,80%{opacity:1;transform:none}100%{opacity:0;transform:translateY(6px)}}
+.vq-orb-wrap:hover .vq-orb-hint,.vq-orb-wrap:focus-within .vq-orb-hint{animation:none;opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.vq-chat-fab,.vq-orb-bubble{animation:none!important}.vq-orb-hint{animation:none}}
+
+/* ================= MIRA panel: larger, conversation-first ================= */
+.vq-chat-panel{width:min(500px,calc(100vw - 24px));height:min(740px,78vh);border-radius:26px}
+.vq-chat-panel.is-min{height:auto}
+.vq-chat-body{position:relative;display:flex;flex-direction:column;padding:0;overflow:hidden;background:#fbf6fd}
+.vq-chat-body>*{flex:1;min-height:0}
+.vq-chat-head{padding:10px 14px}
+@media(max-width:575px){
+  .vq-chat-root{right:0;bottom:0}
+  .vq-chat-panel{position:fixed;inset:0;width:100vw;height:100dvh;max-height:none;border-radius:0;padding-top:env(safe-area-inset-top,0px)}
+  .vq-chat-panel .vq-chat-body{padding-bottom:env(safe-area-inset-bottom,0px)}
+  .vq-orb-wrap{margin:0 14px 14px 0}
+}

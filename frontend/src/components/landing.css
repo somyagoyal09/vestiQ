@@ -1,0 +1,981 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap");
+
+html, body, #root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+.vestiq-landing-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #110b14;
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+}
+
+.vestiq-landing-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: sceneBreath 12s ease-in-out infinite alternate;
+}
+
+.vestiq-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(8, 5, 11, .24) 0%,
+      rgba(8, 5, 11, .08) 32%,
+      rgba(8, 5, 11, .12) 68%,
+      rgba(8, 5, 11, .22) 100%),
+    radial-gradient(ellipse 42% 46% at 50% 43%,
+      rgba(15, 8, 20, .46) 0%,
+      rgba(15, 8, 20, .30) 42%,
+      rgba(15, 8, 20, .12) 68%,
+      transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vestiq-nav {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 88px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, rgba(12, 7, 15, .48), rgba(12, 7, 15, .12));
+  border-bottom: 1px solid rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+}
+
+.vestiq-logo {
+  border: 0;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Playfair Display", serif;
+  font-size: 46px;
+  letter-spacing: -2.5px;
+  font-weight: 700;
+  text-shadow: 0 2px 18px rgba(0,0,0,.35);
+  transition: transform .25s ease, font-weight .25s ease, text-shadow .25s ease;
+}
+
+.vestiq-logo span {
+  color: #e6b9ff;
+  font-style: italic;
+}
+
+.vestiq-logo i {
+  color: #f1a9d1;
+  font-style: normal;
+  font-size: 19px;
+  margin-left: 2px;
+  vertical-align: top;
+}
+
+.vestiq-logo:hover {
+  font-weight: 700;
+  transform: scale(1.045);
+  text-shadow: 0 0 20px rgba(235, 188, 255, .82), 0 3px 18px rgba(0,0,0,.35);
+}
+
+.vestiq-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.vestiq-nav-links a {
+  color: rgba(255,255,255,.90);
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 700;
+  text-shadow: 0 2px 9px rgba(0,0,0,.65);
+  transition: color .2s ease, font-weight .2s ease;
+}
+
+.vestiq-nav-links a:hover,
+.vestiq-nav-links a.active {
+  color: #fff;
+  font-weight: 700;
+}
+
+.vestiq-nav-links a.active {
+  padding-bottom: 7px;
+  border-bottom: 2px solid #efb2dc;
+}
+
+.vestiq-nav-links button {
+  border: 1px solid rgba(240, 190, 225, .82);
+  border-radius: 999px;
+  padding: 13px 25px;
+  color: #fff;
+  background: rgba(30, 17, 34, .34);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: 0 3px 18px rgba(0,0,0,.18);
+  transition: .2s ease;
+}
+
+.vestiq-nav-links button:hover {
+  background: rgba(235, 177, 222, .24);
+  transform: translateY(-1px);
+}
+
+.vestiq-nav-links button span {
+  margin-left: 8px;
+}
+
+.vestiq-hero {
+  position: absolute;
+  z-index: 3;
+  left: 27%;
+  top: 20%;
+  width: 46%;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 4.2px;
+  font-weight: 800;
+  color: rgba(255,255,255,.95);
+  margin: 0 0 18px;
+  text-shadow: 0 2px 10px rgba(0,0,0,.76);
+}
+
+.vestiq-hero h1 {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(62px, 6.1vw, 100px);
+  line-height: .94;
+  letter-spacing: -3px;
+  color: #fff;
+  text-shadow:
+    0 3px 18px rgba(0,0,0,.76),
+    0 0 28px rgba(31, 12, 38, .48);
+}
+
+.vestiq-hero h1 em {
+  display: block;
+  color: #efb3d6;
+  font-style: italic;
+  font-weight: 600;
+  text-shadow: 0 3px 20px rgba(0,0,0,.65), 0 0 25px rgba(236,170,215,.22);
+}
+
+.hero-copy {
+  width: 70%;
+  margin: 27px auto 26px;
+  color: rgba(255,255,255,1);
+  font-size: 18px;
+  line-height: 1.58;
+  font-weight: 600;
+  text-shadow: 0 2px 12px rgba(0,0,0,.82);
+}
+
+.hero-cta {
+  min-width: 300px;
+  padding: 17px 30px;
+  border: 1px solid rgba(255,235,248,.82);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e6a9df, #c7a4f5);
+  color: #24152a;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 38px rgba(155, 92, 182, .45);
+  transition: .25s ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 48px rgba(194, 126, 222, .66);
+}
+
+.hero-cta span {
+  margin-left: 10px;
+}
+
+.secondary-cta {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 25px;
+  border: 1px solid rgba(239,190,225,.78);
+  border-radius: 999px;
+  background: rgba(22, 11, 27, .28);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  text-shadow: 0 2px 9px rgba(0,0,0,.55);
+  transition: .2s ease;
+}
+
+.secondary-cta:hover {
+  background: rgba(236, 176, 218, .20);
+  transform: translateY(-1px);
+}
+
+.play {
+  margin-right: 8px;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 64px;
+}
+
+.feature-row article {
+  min-height: 108px;
+  padding: 15px 11px;
+  border-radius: 18px;
+  background: rgba(30, 16, 32, .52);
+  border: 1px solid rgba(255, 220, 242, .25);
+  backdrop-filter: blur(10px);
+  transition: .25s ease;
+}
+
+.feature-row article:hover {
+  transform: translateY(-5px);
+  background: rgba(75, 42, 73, .72);
+  border-color: rgba(242, 190, 225, .58);
+  box-shadow: 0 12px 28px rgba(0,0,0,.20);
+}
+
+.feature-icon {
+  color: #e8b5ff;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.feature-row h3 {
+  margin: 8px 0 3px;
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .1px;
+}
+
+.feature-row p {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+@keyframes sceneBreath {
+  from { transform: scale(1); }
+  to { transform: scale(1.018); }
+}
+
+@media (max-width: 1000px) {
+  .vestiq-nav { padding: 0 4%; }
+  .vestiq-nav-links a { display: none; }
+  .vestiq-hero { left: 17%; width: 66%; }
+}
+
+@media (max-width: 650px) {
+  .vestiq-logo { font-size: 30px; }
+  .vestiq-nav { height: 68px; }
+  .vestiq-nav-links button { padding: 9px 14px; font-size: 12px; }
+  .vestiq-hero { left: 7%; top: 17%; width: 86%; }
+  .vestiq-hero h1 { font-size: 48px; }
+  .hero-copy { width: 90%; font-size: 13px; }
+  .hero-cta { min-width: 235px; }
+  .feature-row { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
+}
+
+
+
+.vestiq-hero-stage {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+}
+
+/* =========================================================
+   Below-hero sections
+   These use the existing Vestiq visual language and do not
+   modify the original hero/background/butterfly treatment.
+========================================================= */
+
+.vestiq-info-section {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  padding: 130px 7% 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.vestiq-info-card {
+  width: min(1080px, 100%);
+  padding: 58px 64px;
+  box-sizing: border-box;
+  border-radius: 30px;
+  background: rgba(25, 13, 29, .72);
+  border: 1px solid rgba(255, 220, 242, .24);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 70px rgba(0,0,0,.28);
+  text-align: center;
+}
+
+.info-eyebrow {
+  margin: 0 0 14px;
+  color: #efb3d6;
+  font-size: 13px;
+  letter-spacing: 4px;
+  font-weight: 800;
+}
+
+.vestiq-info-card h2 {
+  margin: 0 auto 20px;
+  max-width: 850px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(40px, 5vw, 70px);
+  line-height: 1;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 3px 18px rgba(0,0,0,.55);
+}
+
+.vestiq-info-card > p:not(.info-eyebrow) {
+  max-width: 760px;
+  margin: 0 auto;
+  color: rgba(255,255,255,.82);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 44px;
+}
+
+.how-steps article {
+  padding: 27px 22px;
+  border-radius: 20px;
+  background: rgba(45, 24, 48, .55);
+  border: 1px solid rgba(255, 220, 242, .20);
+  text-align: left;
+}
+
+.how-steps span {
+  color: #e8b5ff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.how-steps h3 {
+  margin: 13px 0 8px;
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  color: #fff;
+}
+
+.how-steps p {
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.about-card {
+  max-width: 920px;
+}
+
+.info-cta {
+  margin-top: 30px;
+  padding: 14px 27px;
+  border: 1px solid rgba(240, 190, 225, .82);
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e6a9df, #c7a4f5);
+  color: #24152a;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: .2s ease;
+}
+
+.info-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(194, 126, 222, .42);
+}
+
+.info-cta span {
+  margin-left: 8px;
+}
+
+@media (max-width: 800px) {
+  .vestiq-info-section {
+    padding: 100px 5% 70px;
+  }
+
+  .vestiq-info-card {
+    padding: 42px 28px;
+  }
+
+  .how-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .vestiq-info-card h2 {
+    font-size: 42px;
+  }
+
+  .vestiq-info-card > p:not(.info-eyebrow) {
+    font-size: 14px;
+  }
+}
+
+
+.feature-detail-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+  .feature-detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .feature-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   Vestiq compact + responsive polish
+   Styling-only override: keeps existing content, artwork,
+   colors and interactions unchanged.
+========================================================= */
+
+/* Desktop: slightly tighter proportions */
+.vestiq-nav {
+  height: 78px;
+  padding: 0 6.5%;
+}
+
+.vestiq-logo {
+  font-size: 40px;
+}
+
+.vestiq-nav-links {
+  gap: 22px;
+}
+
+.vestiq-nav-links a {
+  font-size: 16px;
+}
+
+.vestiq-nav-links button {
+  padding: 11px 20px;
+  font-size: 13px;
+}
+
+.vestiq-hero {
+  top: 19%;
+}
+
+.hero-copy {
+  margin: 22px auto 22px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.hero-cta {
+  min-width: 270px;
+  padding: 14px 26px;
+  font-size: 16px;
+}
+
+.secondary-cta {
+  margin-top: 12px;
+  padding: 8px 21px;
+  font-size: 14px;
+}
+
+.feature-row {
+  gap: 12px;
+  margin-top: 45px;
+}
+
+.feature-row article {
+  min-height: 82px;
+  padding: 11px 9px;
+  border-radius: 15px;
+}
+
+.feature-icon {
+  font-size: 22px;
+}
+
+.feature-row h3 {
+  margin: 6px 0 2px;
+  font-size: 15px;
+}
+
+.feature-row p {
+  font-size: 11px;
+}
+
+/* Below-hero sections: compact product-site proportions */
+.vestiq-info-section {
+  min-height: 100vh;
+  padding: 105px 6% 75px;
+}
+
+.vestiq-info-card {
+  width: min(980px, 92vw);
+  padding: 46px 50px;
+  border-radius: 26px;
+}
+
+.info-eyebrow {
+  margin-bottom: 11px;
+  font-size: 11px;
+  letter-spacing: 3.5px;
+}
+
+.vestiq-info-card h2 {
+  max-width: 760px;
+  margin-bottom: 16px;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1.02;
+}
+
+.vestiq-info-card > p:not(.info-eyebrow) {
+  max-width: 700px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.how-steps {
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.how-steps article {
+  padding: 21px 18px;
+  border-radius: 17px;
+}
+
+.how-steps span {
+  font-size: 11px;
+}
+
+.how-steps h3 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+}
+
+.how-steps p {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.info-cta {
+  margin-top: 24px;
+  padding: 12px 23px;
+  font-size: 14px;
+}
+
+/* Tablet / split-screen: keep the navigation compact instead of letting it crowd. */
+@media (max-width: 1100px) {
+  .vestiq-nav {
+    height: 70px;
+    padding: 0 4%;
+  }
+
+  .vestiq-logo {
+    font-size: 34px;
+    letter-spacing: -2px;
+  }
+
+  .vestiq-logo i {
+    font-size: 14px;
+  }
+
+  .vestiq-nav-links {
+    gap: 8px;
+  }
+
+  .vestiq-nav-links a {
+    font-size: 12px;
+  }
+
+  .vestiq-nav-links a.active {
+    padding-bottom: 4px;
+    border-bottom-width: 1px;
+  }
+
+  .vestiq-nav-links button {
+    padding: 8px 13px;
+    font-size: 11px;
+  }
+
+  .vestiq-nav-links button span {
+    margin-left: 5px;
+  }
+
+  .vestiq-hero {
+    left: 20%;
+    width: 60%;
+    top: 18%;
+  }
+
+  .vestiq-hero h1 {
+    font-size: clamp(50px, 6vw, 76px);
+  }
+
+  .hero-copy {
+    width: 78%;
+    font-size: 14px;
+  }
+
+  .hero-cta {
+    min-width: 235px;
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+
+  .secondary-cta {
+    padding: 7px 18px;
+    font-size: 12px;
+  }
+
+  .feature-row {
+    gap: 9px;
+    margin-top: 34px;
+  }
+
+  .feature-row article {
+    min-height: 72px;
+    padding: 9px 7px;
+    border-radius: 13px;
+  }
+
+  .feature-icon {
+    font-size: 19px;
+  }
+
+  .feature-row h3 {
+    margin-top: 5px;
+    font-size: 13px;
+  }
+
+  .feature-row p {
+    font-size: 9px;
+  }
+
+  .vestiq-info-section {
+    padding: 90px 5% 65px;
+  }
+
+  .vestiq-info-card {
+    width: min(900px, 92vw);
+    padding: 38px 34px;
+  }
+
+  .vestiq-info-card h2 {
+    font-size: clamp(32px, 4.5vw, 50px);
+  }
+
+  .vestiq-info-card > p:not(.info-eyebrow) {
+    font-size: 14px;
+  }
+
+  .how-steps {
+    margin-top: 27px;
+    gap: 11px;
+  }
+
+  .how-steps article {
+    padding: 18px 15px;
+  }
+}
+
+/* Narrow phones: preserve the clean hierarchy and avoid cramped navigation. */
+@media (max-width: 650px) {
+  .vestiq-nav {
+    height: 64px;
+    padding: 0 5%;
+  }
+
+  .vestiq-logo {
+    font-size: 29px;
+  }
+
+  .vestiq-nav-links {
+    gap: 0;
+  }
+
+  .vestiq-nav-links a {
+    display: none;
+  }
+
+  .vestiq-nav-links button {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .vestiq-hero {
+    left: 8%;
+    width: 84%;
+    top: 16%;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 2.8px;
+    margin-bottom: 12px;
+  }
+
+  .vestiq-hero h1 {
+    font-size: 45px;
+    letter-spacing: -1.8px;
+  }
+
+  .hero-copy {
+    width: 88%;
+    margin: 18px auto 18px;
+    font-size: 12px;
+  }
+
+  .hero-cta {
+    min-width: 210px;
+    padding: 11px 18px;
+    font-size: 13px;
+  }
+
+  .secondary-cta {
+    margin-top: 10px;
+    padding: 7px 15px;
+    font-size: 11px;
+  }
+
+  .feature-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .feature-row article {
+    min-height: 65px;
+    padding: 8px 6px;
+    border-radius: 12px;
+  }
+
+  .feature-icon {
+    font-size: 17px;
+  }
+
+  .feature-row h3 {
+    font-size: 12px;
+  }
+
+  .feature-row p {
+    font-size: 9px;
+  }
+
+  .vestiq-info-section {
+    padding: 78px 4% 55px;
+  }
+
+  .vestiq-info-card {
+    width: 94vw;
+    padding: 30px 20px;
+    border-radius: 21px;
+  }
+
+  .info-eyebrow {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+  }
+
+  .vestiq-info-card h2 {
+    font-size: 35px;
+  }
+
+  .vestiq-info-card > p:not(.info-eyebrow) {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .how-steps {
+    margin-top: 22px;
+    gap: 9px;
+  }
+
+  .how-steps article {
+    padding: 16px 14px;
+  }
+
+  .how-steps h3 {
+    font-size: 16px;
+  }
+
+  .how-steps p {
+    font-size: 11px;
+  }
+}
+
+/* FINAL NAV/LOGO CORRECTION
+   The landing JSX uses an image inside .vestiq-logo. Keep that image
+   explicitly constrained so it never renders at its natural size. */
+.vestiq-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.vestiq-logo-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+  object-fit: contain;
+  display: block;
+  flex: 0 0 40px;
+}
+
+.vestiq-wordmark {
+  display: inline-block;
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -2.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.vestiq-wordmark span {
+  color: #e6b9ff;
+  font-style: italic;
+}
+
+.vestiq-wordmark i {
+  color: #f1a9d1;
+  font-style: normal;
+  font-size: 13px;
+  margin-left: 2px;
+  vertical-align: top;
+}
+
+/* The navigation uses buttons, not anchors. Keep them compact and elegant. */
+.vestiq-nav-links {
+  gap: 18px;
+}
+
+.vestiq-nav-links .nav-link {
+  border: 1px solid rgba(240, 190, 225, .72);
+  border-radius: 999px;
+  padding: 9px 17px;
+  color: rgba(255,255,255,.92);
+  background: rgba(30, 17, 34, .20);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  box-shadow: none;
+  text-shadow: 0 2px 9px rgba(0,0,0,.55);
+  transition: .2s ease;
+}
+
+.vestiq-nav-links .nav-link.active {
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(240, 190, 225, .72);
+  background: rgba(235, 177, 222, .08);
+}
+
+.vestiq-nav-links .nav-link:hover {
+  background: rgba(235, 177, 222, .14);
+  transform: translateY(-1px);
+}
+
+.vestiq-nav-links .enter-nav {
+  padding: 9px 17px;
+  font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+  .vestiq-logo-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    flex-basis: 32px;
+  }
+
+  .vestiq-wordmark {
+    font-size: 29px;
+    letter-spacing: -2px;
+  }
+
+  .vestiq-logo {
+    gap: 6px;
+  }
+
+  .vestiq-nav-links {
+    gap: 7px;
+  }
+
+  .vestiq-nav-links .nav-link,
+  .vestiq-nav-links .enter-nav {
+    padding: 7px 11px;
+    font-size: 11px;
+  }
+
+  .vestiq-nav-links .nav-link.active {
+    padding-bottom: 7px;
+  }
+}
+
+@media (max-width: 650px) {
+  .vestiq-logo-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 28px;
+    max-height: 28px;
+    flex-basis: 28px;
+  }
+
+  .vestiq-wordmark {
+    font-size: 25px;
+  }
+}

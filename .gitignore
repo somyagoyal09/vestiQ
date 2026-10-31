@@ -1,0 +1,35 @@
+# Python environments/cache
+.venv-ai/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Frontend dependencies/build
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# AI datasets/models
+ai/dataset/*
+!ai/dataset/README.md
+ai/models/*.pt
+ai/models/*.pth
+ai/models/*.onnx
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Temporary files
+uploads/
+temp/
+*.log
+
+# IDE/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
