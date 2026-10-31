@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌸 Vest IQ 🌸
+# 🌸 VestiQ 🌸
 
 <p>
   <img src="https://img.shields.io/badge/React.js-61DAFB?style=flat-square&logo=react&logoColor=black" />
