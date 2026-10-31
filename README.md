@@ -1,164 +1,158 @@
-
-
 <div align="center">
 
-# Vest IQ
+# 🌸 Vest IQ 🌸
 
 <p>
-  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=111827" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" />
-  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" />
-  <img src="https://img.shields.io/badge/Machine%20Learning-FF6F00?style=flat-square" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Machine%20Learning-FF6F00?style=for-the-badge" />
 </p>
 
 <img src="frontend/public/vestiq-logo.png" alt="Vest IQ Logo" width="120"/>
 
-### AI-Powered Digital Wardrobe & Outfit Recommendation
+### 🌷 AI-Powered Digital Wardrobe & Outfit Recommendation 🌷
 
-**Your wardrobe. Your style. Smarter outfit decisions.**
+**✨ Your wardrobe. Your style. Smarter outfit decisions. ✨**
 
-Organize clothing digitally and discover outfit combinations based on personal preferences, occasions, and weather.
+🌿 Organize clothing digitally and discover outfit combinations based on personal preferences, occasions, and weather. 🌿
 
 </div>
 
 ---
 
-## 💡 What is Vest IQ?
+## 🌼 What is Vest IQ?
 
-**Vest IQ** is an intelligent wardrobe and outfit recommendation web application designed to make everyday outfit selection easier and more personalized.
+**Vest IQ** is an intelligent wardrobe and outfit recommendation web application, designed to make everyday outfit selection easier, more personal, and a little more stylish. 🌸
 
-The application allows users to build a digital wardrobe by adding clothing items, organizing them into categories, and exploring outfit combinations. Its recommendation workflow considers wardrobe availability along with contextual preferences such as weather, occasion, style, and clothing choices.
+Build a digital wardrobe by adding clothing items, sort them into categories, and explore outfit combinations. The recommendation system considers wardrobe availability along with weather, occasion, style, and clothing choices. 🌺
 
-Vest IQ combines a React-based user interface, a FastAPI backend, MongoDB data storage, and machine-learning components for clothing image classification and outfit assistance.
+Vest IQ brings together a React-based interface, a FastAPI backend, MongoDB storage, and machine-learning components for clothing image classification and outfit assistance. 🌿
 
-## ✨ Key Features
+## 🌹 Key Features
 
-- **Digital Wardrobe** — Add and organize clothing items in a personal digital wardrobe.
-- **AI-Based Clothing Classification** — Use image classification to help identify and categorize uploaded clothing.
-- **Personalized Outfit Recommendations** — Discover outfit combinations using wardrobe items and user preferences.
-- **Weather-Aware Suggestions** — Consider weather conditions when generating outfit recommendations.
-- **Occasion-Based Styling** — Explore outfit ideas suited to different occasions and style preferences.
-- **Personal Stylist Assistant** — Interact with a stylist feature to request outfit suggestions using natural-language preferences.
-- **Outfit History and Saved Looks** — Keep track of outfit choices and save or rate preferred combinations.
-- **User Authentication** — Provide account-based access to wardrobe and application features.
+- 👗 **Digital Wardrobe**: Add and organize your clothing items in one personal digital wardrobe.
+- 🪡 **AI-Based Clothing Classification**: Use image classification to identify and categorize uploaded clothing automatically.
+- 🌸 **Recommendation System**: Discover outfit combinations built from your wardrobe and personal preferences.
+- ☁️ **Weather-Aware Suggestions**: Outfits adapt to the weather, so you are always dressed for the day.
+- 🎀 **Occasion-Based Styling**: Get outfit ideas for different occasions and style moods.
+- 🦋 **Veera, Your Stylist Chatbot**: Chat naturally with Veera to get outfit suggestions and build your style profile.
+- 🌷 **Outfit History and Saved Looks**: Keep track of outfit choices and save or rate your favourite combinations.
+- 🔐 **User Authentication**: Account-based access to your wardrobe and all app features.
 
-## 🖼️ Screenshots
+## 🌺 Screenshots
 
-> Add screenshots to `docs/screenshots/` and update the image paths below when they are ready.
+> 🌼 Add screenshots to `docs/screenshots/` and update the image paths below when they are ready.
 
-### Landing Page
+### 🌸 Landing Page
 
 <p align="center">
   <img src="docs/screenshots/landing-page.png" alt="Vest IQ Landing Page" width="100%"/>
 </p>
 
 <details>
-<summary><strong>View More Screenshots</strong></summary>
+<summary><strong>🌷 View More Screenshots</strong></summary>
 
-### Authentication
+### 🔐 Authentication
 
 <p align="center">
   <img src="docs/screenshots/authentication.png" alt="Vest IQ Authentication" width="100%"/>
 </p>
 
-### Digital Wardrobe
+### 👗 Digital Wardrobe
 
 <p align="center">
   <img src="docs/screenshots/wardrobe.png" alt="Vest IQ Digital Wardrobe" width="100%"/>
 </p>
 
-### Outfit Recommendations
+### 🌸 Outfit Recommendations
 
 <p align="center">
   <img src="docs/screenshots/recommendations.png" alt="Vest IQ Outfit Recommendations" width="100%"/>
 </p>
 
-### Personal Stylist
+### 🦋 Veera, Personal Stylist
 
 <p align="center">
-  <img src="docs/screenshots/personal-stylist.png" alt="Vest IQ Personal Stylist" width="100%"/>
+  <img src="docs/screenshots/personal-stylist.png" alt="Veera Personal Stylist" width="100%"/>
 </p>
 
 </details>
 
-## 🏗️ Architecture Overview
+## 🌿 Architecture Overview
 
 ```text
-                         VEST IQ
-                            │
-                       User Interface
-                            │
-                    React + Vite Frontend
-                            │
-                      FastAPI Backend
-                            │
-        ┌───────────────────┼────────────────────┐
-        ▼                   ▼                    ▼
- Authentication       Wardrobe APIs       Recommendation APIs
-        │                   │                    │
-        │                   ▼                    ▼
-        │              MongoDB Data       Context & Preferences
-        │                                        │
-        │                         ┌──────────────┼──────────────┐
-        │                         ▼              ▼              ▼
-        │                    Weather        Occasion        Style &
-        │                    Context        Preferences     Clothing
-        │                         │              │              │
-        │                         └──────────────┼──────────────┘
-        │                                        ▼
-        │                              Outfit Generation
-        │                                        │
-        │                                        ▼
-        │                               Recommended Outfits
-        │
-        └───────────────────────────────────────────────────────
-
-                   AI Clothing Classification
-                            │
-                    Image Preprocessing
-                            │
-                    Trained ML Model
-                            │
-                    Clothing Prediction
-                            │
-                    Wardrobe Categorization
+VEST IQ
+   │
+   ▼
+User Interface ──► React + Vite Frontend
+   │
+   ▼
+FastAPI Backend
+   │
+   ├── Authentication
+   ├── Wardrobe APIs ─────────► MongoDB Data
+   ├── Recommendation APIs ───► Context & Preferences
+   │                              ├── Weather Context
+   │                              ├── Occasion Preferences
+   │                              └── Style & Clothing ──► Outfit Generation ──► Recommended Outfits
+   └── Veera Stylist APIs ────► Style Profile & Chat
 ```
 
-## 🧠 AI/ML Workflow
-
-Vest IQ includes a machine-learning pipeline for clothing image classification. The project uses a transfer-learning approach to train image classification models.
+### 🪡 AI Clothing Classification Pipeline
 
 ```text
-Clothing Image Dataset
-        │
-        ▼
-Data Preprocessing
-        │
-        ▼
-Train / Validation / Test Split
-        │
-        ▼
-Transfer Learning
-        │
-        ▼
-Model Training
-        │
-        ▼
-Model Evaluation
-        │
-        ▼
-Saved Model
-        │
-        ▼
-Inference on Clothing Images
-        │
-        ▼
-Predicted Clothing Category
+Clothing Image
+      │
+      ▼
+Image Preprocessing
+      │
+      ▼
+Trained ML Model (EfficientNet, Transfer Learning)
+      │
+      ▼
+Clothing Prediction
+      │
+      ▼
+Wardrobe Categorization
 ```
 
-The AI workflow is organized into separate preprocessing, training, evaluation, and inference modules under the `ai/` directory.
+## 🌹 Tech Stack
+
+### 🌸 Frontend
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+
+### 🌷 Backend
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)
+
+### 🌼 Database
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+
+### 🦋 Machine Learning & Data
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
+![Transfer Learning](https://img.shields.io/badge/Transfer%20Learning-FF6F00?style=flat-square)
+
+## 🦋 Meet Veera, Your Personal Stylist
+
+Veera is the stylist chatbot inside Vest IQ. Instead of filling out long forms, you simply chat. 🌸
+
+- 🌷 Share your style in your own words: categories, fit, colours, occasions, budget, and things you dislike.
+- 🌿 Answer one or two questions at a time, and skip or edit anything whenever you like.
+- 🌺 Get outfit suggestions that match your wardrobe, your mood, and the occasion.
 
 ## 📁 Directory Layout
 
@@ -247,7 +241,7 @@ VestIQ/
 └── README.md                              # Project documentation
 ```
 
-### Folder Responsibilities
+### 🌿 Folder Responsibilities
 
 **`ai/`** contains the machine-learning workflow for clothing image classification. Its preprocessing scripts prepare datasets, training scripts train the models, evaluation scripts measure model performance, and inference scripts load saved models to predict clothing categories from images. Dataset contents and large model files are managed separately from the source code where appropriate.
 
@@ -261,21 +255,21 @@ VestIQ/
 
 ## ⚙️ Setup & Installation
 
-### Prerequisites
+### 🌸 Prerequisites
 
-- Python 3.11+
-- Node.js and npm
-- MongoDB Atlas account or a local MongoDB instance
-- Required API credentials for the services enabled in your configuration
+- 🐍 Python 3.11+
+- 🟢 Node.js and npm
+- 🍃 MongoDB Atlas account or a local MongoDB instance
+- 🔑 Required API credentials for the services enabled in your configuration
 
-### 1. Clone the Repository
+### 🌷 1. Clone the Repository
 
 ```bash
 git clone https://github.com/somyagoyal09/vestiQ.git
 cd vestiQ
 ```
 
-### 2. Configure the Backend
+### 🌼 2. Configure the Backend
 
 ```bash
 cd backend
@@ -303,9 +297,9 @@ copy .env.example backend\.env
 
 Configure the required MongoDB connection string, authentication settings, and service credentials in the environment file. Use the variable names documented in `.env.example` and the backend configuration module.
 
-> **Security Note:** Never commit `.env` files or private API credentials to GitHub.
+> **🔒 Security Note:** Never commit `.env` files or private API credentials to GitHub.
 
-### 3. Configure the Frontend
+### 🌺 3. Configure the Frontend
 
 ```bash
 cd frontend
@@ -316,7 +310,7 @@ Configure the frontend API base URL using the environment variable expected by t
 
 ## ▶️ Running the Application
 
-### Start the FastAPI Backend
+### 🌸 Start the FastAPI Backend
 
 From the `backend/` directory:
 
@@ -330,7 +324,7 @@ Backend:
 http://127.0.0.1:8000
 ```
 
-### Start the React Frontend
+### 🌷 Start the React Frontend
 
 From the `frontend/` directory:
 
@@ -344,7 +338,7 @@ Frontend:
 http://localhost:5173
 ```
 
-### API Documentation
+### 🌿 API Documentation
 
 FastAPI provides interactive API documentation at:
 
@@ -365,14 +359,14 @@ Vest IQ can be deployed using separate frontend and backend services.
 
 Deployment requires configuring the frontend's backend API URL, backend environment variables, database access, and allowed frontend origins in the backend CORS settings.
 
-> Deployment URLs will be added here after the application is live and verified.
+> 🌼 Deployment URLs will be added here after the application is live and verified.
 
 ## 🔗 Project Links
 
-- **GitHub Repository:** https://github.com/somyagoyal09/vestiQ
-- **Live Application:** Coming soon
-- **Backend API:** Coming soon
-- **API Documentation:** Coming soon
+- 🌸 **GitHub Repository:** https://github.com/somyagoyal09/vestiQ
+- 🌷 **Live Application:** Coming soon
+- 🌿 **Backend API:** Coming soon
+- 🌺 **API Documentation:** Coming soon
 
 ## 📜 License
 
@@ -384,7 +378,10 @@ For complete terms and conditions, refer to the [LICENSE](LICENSE) file.
 
 <div align="center">
 
-**Vest IQ — Your wardrobe. Your style. Smarter outfit decisions.**
+🌸 🌷 🌼 🌿 🌺 🦋 🌹 🍃 🌸 🌷 🌼 🌿 🌺 🦋 🌹
+
+**🌸 Vest IQ — Your wardrobe. Your style. Smarter outfit decisions. 🌸**
+
+🌿 🌹 🦋 🌺 🌼 🌷 🌸 🍃 🌿 🌹 🦋 🌺 🌼 🌷 🌸
 
 </div>
-
