@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌸 Vest IQ
+# 🌸 Vest IQ 🌸
 
 <p>
   <img src="https://img.shields.io/badge/React.js-61DAFB?style=flat-square&logo=react&logoColor=black" />
@@ -19,66 +19,70 @@
 
 <img src="frontend/public/vestiq-logo.png" alt="Vest IQ Logo" width="120"/>
 
-### AI-Powered Digital Wardrobe & Outfit Recommendation
+### 🌷 AI-Powered Digital Wardrobe & Outfit Recommendation 🌷
 
-**Your wardrobe. Your style. Smarter outfit decisions.**
+**✨ Your wardrobe. Your style. Smarter outfit decisions. ✨**
+
+🌿 Organize clothing digitally and discover outfit combinations based on personal preferences, occasions, and weather. 🌿
 
 </div>
 
 ---
 
-## What is Vest IQ?
+## 🌼 What is Vest IQ?
 
-**Vest IQ** is an AI-powered digital wardrobe and personalized fashion recommendation platform. It helps users organize their clothing, discover outfit combinations, and make styling decisions based on their wardrobe, preferences, occasions, and weather.
+**Vest IQ** is an intelligent wardrobe and outfit recommendation web application, designed to make everyday outfit selection easier, more personal, and a little more stylish. 🌸
 
-The machine-learning component uses EfficientNet-B0 with transfer learning to classify Western and traditional clothing images. The recommendation engine combines wardrobe data with clothing categories, color compatibility, style preferences, and contextual inputs to suggest outfits. The conversational stylist, **Mira**, offers fashion guidance and outfit ideas, with optional access to the user's wardrobe context.
+Build a digital wardrobe by adding clothing items, sort them into categories, and explore outfit combinations. The recommendation system considers wardrobe availability along with weather, occasion, style, and clothing choices. 🌺
 
-## Key Features
+The machine-learning component uses EfficientNet-B0 with transfer learning to classify Western and traditional clothing images. The conversational stylist, **Mira**, offers fashion guidance and outfit ideas, with optional access to the user's wardrobe context. 🌿
 
-- **Digital Wardrobe**: Add clothing items, organize them into categories, and build a personal digital wardrobe.
-- **AI Clothing Classification**: EfficientNet-B0 transfer learning classifies Western and traditional/Indian clothing, including 12 traditional categories such as sarees, kurtas, lehengas, and sherwanis.
-- **Recommendation System**: A context-aware engine ranks wardrobe combinations using clothing categories, color compatibility, style, occasion, and weather.
-- **Weather-Aware Suggestions**: Outfit recommendations adapt to current weather conditions.
-- **Occasion-Based Styling**: Get outfit ideas suited to different occasions and style preferences.
-- **Mira, AI Stylist Chatbot**: An LLM-powered conversational stylist for fashion guidance and outfit ideas.
+## 🌹 Key Features
+
+- 👗 **Digital Wardrobe**: Add clothing items, organize them into categories, and build a personal digital wardrobe.
+- 🪡 **AI Clothing Classification**: EfficientNet-B0 transfer learning classifies Western and traditional/Indian clothing, including 12 traditional categories such as sarees, kurtas, lehengas, and sherwanis.
+- 🌸 **Recommendation System**: A context-aware engine ranks wardrobe combinations using clothing categories, color compatibility, style, occasion, and weather.
+- ☁️ **Weather-Aware Suggestions**: Outfit recommendations adapt to current weather conditions.
+- 🎀 **Occasion-Based Styling**: Get outfit ideas suited to different occasions and style preferences.
+- 🦋 **Mira, AI Stylist Chatbot**: An LLM-powered conversational stylist for fashion guidance and outfit ideas.
   - Supports both Anthropic and Gemini as LLM providers.
   - Can use the user's wardrobe context when enabled.
   - Handles natural-language requests, such as "something comfortable for a wedding in winter."
-- **Outfit History and Saved Looks**: Track outfit choices and save or rate preferred combinations.
-- **User Authentication**: Account-based access to wardrobe and application features.
+- 🌷 **Outfit History and Saved Looks**: Track outfit choices and save or rate preferred combinations.
+- 🔐 **User Authentication**: Account-based access to wardrobe and application features.
 
-## Screenshots
+## 🌺 Screenshots
 
-> Screenshots will be added to `docs/screenshots/`.
+> 🌼 Screenshots will be added to `docs/screenshots/`.
 
-### Landing Page
+### 🌸 Landing Page
 
 <p align="center">
   <img src="docs/screenshots/landing-page.png" alt="Vest IQ Landing Page" width="100%"/>
 </p>
 
 <details>
-<summary><strong>View More Screenshots</strong></summary>
+<summary><strong>🌷 View More Screenshots</strong></summary>
 
-### Authentication
+### 🔐 Authentication
 
 <p align="center">
   <img src="docs/screenshots/authentication.png" alt="Vest IQ Authentication" width="100%"/>
 </p>
 
-### Digital Wardrobe
+### 👗 Digital Wardrobe
 
 <p align="center">
   <img src="docs/screenshots/wardrobe.png" alt="Vest IQ Digital Wardrobe" width="100%"/>
 </p>
 
-### Outfit Recommendations
+### 🌸 Outfit Recommendations
 
 <p align="center">
   <img src="docs/screenshots/recommendations.png" alt="Vest IQ Outfit Recommendations" width="100%"/>
 </p>
 
-### Mira AI Stylist
+### 🦋 Mira AI Stylist
 
 <p align="center">
   <img src="docs/screenshots/mira-stylist.png" alt="Mira AI Stylist" width="100%"/>
@@ -86,7 +90,7 @@ The machine-learning component uses EfficientNet-B0 with transfer learning to cl
 
 </details>
 
-## Architecture Overview
+## 🌿 Architecture Overview
 
 ```text
                                      VEST IQ
@@ -113,7 +117,7 @@ Protects all routes     MongoDB Data     Context & Preferences                  
                                                                    Anthropic / Gemini
 ```
 
-## Directory Layout
+## 📁 Directory Layout
 
 ```text
 VestIQ/
@@ -200,7 +204,7 @@ VestIQ/
 └── README.md                              # Project documentation
 ```
 
-### Folder Responsibilities
+### 🍃 Folder Responsibilities
 
 **`ai/`** contains the machine-learning workflow for clothing image classification. Its preprocessing scripts prepare datasets, training scripts train the models, evaluation scripts measure model performance, and inference scripts load saved models to predict clothing categories from images. Dataset contents and large model files are managed separately from the source code where appropriate.
 
@@ -212,23 +216,23 @@ VestIQ/
 
 **`.gitignore`** lists local environments, generated files, datasets, model artifacts, secrets, and other files that should not be committed to Git.
 
-## Setup & Installation
+## ⚙️ Setup & Installation
 
-### Prerequisites
+### 🌸 Prerequisites
 
 - Python 3.11+
 - Node.js and npm
 - MongoDB Atlas account or a local MongoDB instance
 - Required API credentials for the services enabled in your configuration
 
-### 1. Clone the Repository
+### 🌷 1. Clone the Repository
 
 ```bash
 git clone https://github.com/somyagoyal09/vestiQ.git
 cd vestiQ
 ```
 
-### 2. Configure the Backend
+### 🌼 2. Configure the Backend
 
 ```bash
 cd backend
@@ -256,9 +260,9 @@ copy .env.example backend\.env
 
 Configure the required MongoDB connection string, authentication settings, and service credentials in the environment file. Use the variable names documented in `.env.example` and the backend configuration module.
 
-> **Security Note:** Never commit `.env` files or private API credentials to GitHub.
+> 🔒 **Security Note:** Never commit `.env` files or private API credentials to GitHub.
 
-### 3. Configure the Frontend
+### 🌺 3. Configure the Frontend
 
 ```bash
 cd frontend
@@ -267,9 +271,9 @@ npm install
 
 Configure the frontend API base URL using the environment variable expected by the frontend code.
 
-## Running the Application
+## ▶️ Running the Application
 
-### Start the FastAPI Backend
+### 🌸 Start the FastAPI Backend
 
 From the `backend/` directory:
 
@@ -283,7 +287,7 @@ Backend:
 http://127.0.0.1:8000
 ```
 
-### Start the React Frontend
+### 🌷 Start the React Frontend
 
 From the `frontend/` directory:
 
@@ -297,7 +301,7 @@ Frontend:
 http://localhost:5173
 ```
 
-### API Documentation
+### 🌿 API Documentation
 
 FastAPI provides interactive API documentation at:
 
@@ -305,7 +309,7 @@ FastAPI provides interactive API documentation at:
 http://127.0.0.1:8000/docs
 ```
 
-## Deployment
+## 🚀 Deployment
 
 Vest IQ can be deployed using separate frontend and backend services.
 
@@ -318,16 +322,16 @@ Vest IQ can be deployed using separate frontend and backend services.
 
 Deployment requires configuring the frontend's backend API URL, backend environment variables, database access, and allowed frontend origins in the backend CORS settings.
 
-> Deployment URLs will be added here after the application is live and verified.
+> 🌼 Deployment URLs will be added here after the application is live and verified.
 
-## Project Links
+## 🔗 Project Links
 
-- **GitHub Repository:** https://github.com/somyagoyal09/vestiQ
-- **Live Application:** Coming soon
-- **Backend API:** Coming soon
-- **API Documentation:** Coming soon
+- 🌸 **GitHub Repository:** https://github.com/somyagoyal09/vestiQ
+- 🌷 **Live Application:** Coming soon
+- 🌿 **Backend API:** Coming soon
+- 🌺 **API Documentation:** Coming soon
 
-## License
+## 📜 License
 
 This project is licensed under the **MIT License**.
 
@@ -337,6 +341,8 @@ For complete terms and conditions, refer to the [LICENSE](LICENSE) file.
 
 <div align="center">
 
-**Vest IQ — Your wardrobe. Your style. Smarter outfit decisions.** 🌸
+🌸 🌷 🌼 🌿 🌺 🦋 🌹 🍃 🌸
+
+**🌸 Vest IQ — Your wardrobe. Your style. Smarter outfit decisions. 🌸**
 
 </div>
