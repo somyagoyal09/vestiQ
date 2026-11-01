@@ -8,7 +8,7 @@ import vestiqLogoIcon from "./assets/vestiq-logo.png";
 import "./dashboard-theme.css";
 import "./vestiq-polish.css";
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://vestiq-backend.onrender.com";
 
 const GENDER_OPTIONS = [
   { value: "female", label: "Women's" },
