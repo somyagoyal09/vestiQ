@@ -8,6 +8,7 @@ from app.routes.wardrobe import router as wardrobe_router
 from app.routes.weather import router as weather_router
 from app.routes.recommendations import router as recommendations_router
 from app.routes.stylist import router as stylist_router
+from app.routes.set_password import router as set_password_router
 
 application = FastAPI(
     title=settings.APP_NAME,
@@ -33,6 +34,7 @@ application.include_router(wardrobe_router)
 application.include_router(weather_router)
 application.include_router(recommendations_router)
 application.include_router(stylist_router)
+application.include_router(set_password_router)
 
 @application.get("/")
 def home():

@@ -5,6 +5,7 @@ import vestiqWordmark from "./assets/vestiq-wordmark-exact.png";
 import authWardrobeBg from "./assets/vestiq-auth-clean-bg.png";
 import StylistChat from "./components/StylistChat.jsx";
 import vestiqLogoIcon from "./assets/vestiq-logo.png";
+import SetPassword from "./components/SetPassword.jsx";
 import "./dashboard-theme.css";
 import "./vestiq-polish.css";
 
@@ -1337,17 +1338,20 @@ const getRecommendations = async (
           />
         )}
 
-        {view === "profile" && (
-          <ProfileView
-            displayName={displayName}
-            setupData={setupData}
-            setSetupData={setSetupData}
-            onReopenSetup={() => { setSetupStep(0); setView("setup"); }}
-            dailyMood={dailyMood}
-            onMood={() => setMoodOpen(true)}
-            history={outfitHistory}
-            saved={savedOutfits}
-          />
+                {view === "profile" && (
+          <>
+            <ProfileView
+              displayName={displayName}
+              setupData={setupData}
+              setSetupData={setSetupData}
+              onReopenSetup={() => { setSetupStep(0); setView("setup"); }}
+              dailyMood={dailyMood}
+              onMood={() => setMoodOpen(true)}
+              history={outfitHistory}
+              saved={savedOutfits}
+            />
+            <SetPassword apiUrl={API_URL} token={token} />
+          </>
         )}
       </main>
 
