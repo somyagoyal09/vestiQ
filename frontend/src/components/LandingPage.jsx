@@ -65,7 +65,7 @@ export default function LandingPage({ onEnter }) {
           <button className={`nav-link ${activeSection === "features" ? "active" : ""}`} onClick={() => scrollTo("features")}>Features</button>
           <button className={`nav-link ${activeSection === "how" ? "active" : ""}`} onClick={() => scrollTo("how")}>How it works</button>
           <button className={`nav-link ${activeSection === "about" ? "active" : ""}`} onClick={() => scrollTo("about")}>About</button>
-          <button className="enter-nav" onClick={onEnter}>Enter Vestiq <span>→</span></button>
+          <button className="enter-nav" onClick={() => { setMenuOpen(false); onEnter(); }}>Enter Vestiq <span>→</span></button>
         </nav>
       </header>
 
