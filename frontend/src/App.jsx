@@ -8,6 +8,22 @@ import vestiqLogoIcon from "./assets/vestiq-logo.png";
 import "./dashboard-theme.css";
 import "./vestiq-polish.css";
 
+// Reads the result of the Google/Instagram round-trip once, then cleans the address bar.
+// The backend sends the JWT in the URL fragment (#token=...) and errors as ?oauth_error=...
+const OAUTH_RETURN = (() => {
+  if (typeof window === "undefined") return { token: "", error: "" };
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const query = new URLSearchParams(window.location.search);
+  const result = {
+    token: hash.get("token") || "",
+    error: query.get("oauth_error") || "",
+  };
+  if (result.token || result.error) {
+    window.history.replaceState(null, "", window.location.pathname);
+  }
+  return result;
+})();
+
 const API_URL = "https://vestiq-backend.onrender.com";
 
 const GENDER_OPTIONS = [
@@ -163,16 +179,25 @@ function getErrorMessage(data, fallback) {
   return fallback;
 }
 
+// True when a JWT exists and has at least a few seconds of life left.
+const isUsableToken = (value) => Boolean(value) && tokenExpiry(value) > Date.now() + 5000;
+
 function App() {
-  const [showLanding, setShowLanding] = useState(true);
+  const [showLanding, setShowLanding] = useState(
+    () => !(OAUTH_RETURN.token || OAUTH_RETURN.error)
+  );
   const [view, setView] = useState("home");
   const [authMode, setAuthMode] = useState("login");
-  const [authStep, setAuthStep] = useState("auth");
+  const [authStep, setAuthStep] = useState(() =>
+    isUsableToken(OAUTH_RETURN.token) ? "ready" : "auth"
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [token, setToken] = useState(() => {
+    // A token returned by Google/Instagram login takes priority over the one saved in localStorage.
+    if (isUsableToken(OAUTH_RETURN.token)) return OAUTH_RETURN.token;
     // A token left in localStorage may have expired; using it makes every first request fail with 401.
     const saved = localStorage.getItem("vestiq_token") || "";
     if (saved && tokenExpiry(saved) <= Date.now() + 5000) {
@@ -182,7 +207,9 @@ function App() {
     return saved;
   });
   const [displayName, setDisplayName] = useState(() => localStorage.getItem("vestiq_name") || "");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(() =>
+    OAUTH_RETURN.error ? `Google login failed: ${OAUTH_RETURN.error}` : ""
+  );
   const [busy, setBusy] = useState(false);
   const [duplicateAccountOpen, setDuplicateAccountOpen] = useState(false);
 
@@ -262,7 +289,7 @@ function App() {
     localStorage.setItem("vestiq_style_profile", JSON.stringify(setupData));
   }, [setupData]);
 
-  // Session restore (browser refresh): the database decides whether onboarding is needed.
+  // Session restore (browser refresh or OAuth return): the database decides whether onboarding is needed.
   useEffect(() => {
     if (!token) return undefined;
     let cancelled = false;
