@@ -1,3 +1,4 @@
+# Purpose: Mira stylist logic: prompts, history, preferences and reply parsing
 """Fashion stylist chatbot logic.
 
 Deliberately separate from recommendation_service.py (which ranks outfits from the

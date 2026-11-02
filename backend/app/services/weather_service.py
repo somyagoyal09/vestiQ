@@ -1,3 +1,4 @@
+# Purpose: fetches the weather forecast from the weather API
 import httpx
 
 from datetime import datetime, timedelta, timezone

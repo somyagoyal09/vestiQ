@@ -1,3 +1,4 @@
+# Purpose: Pydantic models for register, login, profile and user responses
 from pydantic import BaseModel, EmailStr, Field
 
 

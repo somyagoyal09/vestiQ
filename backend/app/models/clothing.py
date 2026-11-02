@@ -1,3 +1,4 @@
+# Purpose: builds MongoDB documents for wardrobe clothing items
 from datetime import datetime, timezone
 from bson import ObjectId
 

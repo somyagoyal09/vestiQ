@@ -1,3 +1,4 @@
+# Purpose: manual check of Mira replies against the real LLM (makes API calls)
 """Manual behaviour check for the fashion stylist against the REAL LLM.
 
 Run from the backend folder (uses LLM_API_KEY from your .env; makes ~12 small API calls,

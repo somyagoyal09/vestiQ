@@ -1,3 +1,4 @@
+# Purpose: password hashing (bcrypt), JWT creation and get_current_user
 from datetime import datetime, timedelta, timezone
 
 from bson import ObjectId

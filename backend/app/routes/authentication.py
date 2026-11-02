@@ -1,3 +1,4 @@
+# Purpose: auth endpoints: register, login, Google and Instagram OAuth, profile, mood
 from datetime import datetime, timezone
 import secrets
 from urllib.parse import urlencode

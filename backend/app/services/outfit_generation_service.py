@@ -1,3 +1,4 @@
+# Purpose: generates outfit combinations (not used by app code yet)
 from itertools import product
 
 

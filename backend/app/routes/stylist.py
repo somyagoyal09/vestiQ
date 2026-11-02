@@ -1,3 +1,4 @@
+# Purpose: Mira stylist endpoints: chat, preferences and history
 from fastapi import APIRouter, Depends, HTTPException, Query
 import logging
 import os

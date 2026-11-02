@@ -1,3 +1,4 @@
+# Purpose: wardrobe endpoints: add item, list, worn/unworn, delete
 from pathlib import Path
 from datetime import datetime, timezone
 

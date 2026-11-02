@@ -1,3 +1,4 @@
+# Purpose: creates the FastAPI app, enables CORS and registers all routers
 from fastapi import FastAPI
 
 from fastapi.middleware.cors import CORSMiddleware

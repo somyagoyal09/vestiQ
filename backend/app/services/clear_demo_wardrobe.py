@@ -1,3 +1,4 @@
+# Purpose: helper that clears the demo user's wardrobe (not used by app code)
 from pathlib import Path
 import sys
 

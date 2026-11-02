@@ -1,3 +1,4 @@
+# Purpose: GET /weather/forecast endpoint
 from datetime import date, timedelta
 
 from fastapi import (

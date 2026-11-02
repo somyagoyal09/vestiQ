@@ -1,3 +1,4 @@
+# Purpose: uploads clothing images to Cloudinary and returns the URL
 import cloudinary
 import cloudinary.uploader
 

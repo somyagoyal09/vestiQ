@@ -1,3 +1,4 @@
+# Purpose: builds an outfit collage from two item images (not used by app code yet)
 from io import BytesIO
 import base64
 from uuid import uuid4

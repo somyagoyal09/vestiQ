@@ -1,3 +1,4 @@
+# Purpose: LLM provider wrapper for Gemini and Anthropic
 
 """LLM provider abstraction for Vest IQ's personal fashion stylist."""
 

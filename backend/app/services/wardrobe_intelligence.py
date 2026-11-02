@@ -1,3 +1,4 @@
+# Purpose: detects dominant colour from an image (not used by app code yet)
 from collections import Counter
 
 from PIL import Image

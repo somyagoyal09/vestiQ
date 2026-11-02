@@ -1,3 +1,4 @@
+# Purpose: builds MongoDB documents for new user accounts
 from datetime import datetime, timezone
 
 from bson import ObjectId

@@ -1,3 +1,4 @@
+# Purpose: MongoDB connection helpers (get_database, check_database_connection)
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 

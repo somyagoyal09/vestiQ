@@ -1,3 +1,4 @@
+# Purpose: Pydantic models for wardrobe item requests and responses
 from datetime import datetime
 
 from pydantic import BaseModel, Field

@@ -1,3 +1,4 @@
+# Purpose: Pydantic models and limits for stylist preferences, chat and history
 
 import base64
 import re

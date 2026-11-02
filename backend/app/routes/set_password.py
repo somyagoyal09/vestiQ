@@ -1,3 +1,4 @@
+# Purpose: POST /auth/set-password for adding or changing a password
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException

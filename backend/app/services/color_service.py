@@ -1,3 +1,4 @@
+# Purpose: detects clothing colour from an image (not used by app code yet)
 from collections import Counter
 
 import cv2

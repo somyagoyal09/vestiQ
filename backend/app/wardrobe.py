@@ -1,3 +1,4 @@
+# Purpose: unused duplicate wardrobe router, not imported by main.py
 from pathlib import Path
 import tempfile
 

@@ -1,3 +1,4 @@
+# Purpose: Python dependencies for the backend
 fastapi
 uvicorn[standard]
 pymongo

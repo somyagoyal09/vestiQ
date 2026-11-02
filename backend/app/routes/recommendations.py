@@ -1,3 +1,4 @@
+# Purpose: GET /recommendations: outfit suggestions from wardrobe, weather and preferences
 from datetime import date, timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, Query

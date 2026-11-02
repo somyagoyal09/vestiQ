@@ -1,3 +1,4 @@
+# Purpose: builds MongoDB documents for stylist profiles and chat messages
 from datetime import datetime, timezone
 
 from bson import ObjectId
