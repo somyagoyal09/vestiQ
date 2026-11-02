@@ -74,6 +74,7 @@ def _validate_state(request: Request, state: str | None) -> None:
         raise HTTPException(status_code=400, detail="OAuth state validation failed.")
 
 
+
 def _finish_oauth(
     response: RedirectResponse,
     user: dict,
@@ -88,7 +89,7 @@ def _finish_oauth(
         samesite="lax",
     )
     response.headers["Location"] = (
-        f"{settings.FRONTEND_URL.rstrip('/')}?token={token}"
+        f"{settings.FRONTEND_URL.rstrip('/')}#token={token}"
     )
     return response
 
