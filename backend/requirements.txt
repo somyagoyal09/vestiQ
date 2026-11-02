@@ -5,9 +5,9 @@ python-dotenv
 pydantic
 python-multipart
 httpx
-bcrypt
+bcrypt==4.0.1
 python-jose[cryptography]
-passlib
+passlib==1.7.4
 cloudinary
 requests
 anthropic
