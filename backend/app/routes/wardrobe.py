@@ -24,6 +24,9 @@ router = APIRouter(
     tags=["Wardrobe"],
 )
 
+# Canonical domain values. Matches recommendation_service.infer_domain().
+ALLOWED_DOMAINS = {"western", "traditional", "indo_western", "fusion", "other"}
+
 
 def serialize_item(item: dict) -> dict:
     return {
@@ -74,7 +77,10 @@ async def add_clothing_item(
     # Clean user-confirmed values
     # -----------------------------
     final_name = name.strip()
-    final_domain = domain.strip().lower()
+    # Same normalisation as the recommendation system: "indo-western" -> "indo_western".
+    final_domain = (
+        domain.strip().lower().replace("-", "_").replace("/", "_").replace(" ", "_")
+    )
     final_category = category.strip().lower()
     final_color = color.strip().lower() if color else None
     final_style = style.strip().lower() if style else None
@@ -90,10 +96,10 @@ async def add_clothing_item(
             detail="Clothing name is required.",
         )
 
-    if final_domain not in {"western", "traditional"}:
+    if final_domain not in ALLOWED_DOMAINS:
         raise HTTPException(
             status_code=400,
-            detail="Domain must be western or traditional.",
+            detail="Domain must be one of: western, traditional, indo-western, fusion, other.",
         )
 
     if not final_category:
@@ -252,6 +258,7 @@ def mark_item_as_worn(
     return {
         "message": "Clothing marked as worn today."
     }
+
 
 @router.post("/items/{item_id}/unworn")
 def undo_item_worn(item_id: str, current_user: dict = Depends(get_current_user)):
