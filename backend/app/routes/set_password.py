@@ -24,10 +24,10 @@ class SetPasswordPayload(BaseModel):
 
 
 def _check_bcrypt_length(password: str, label: str) -> None:
-    if len(password.encode("utf-8")) > BCRYPT_MAX_BYTES:
+    if len(password.encode("utf-8")) > 72:
         raise HTTPException(
             status_code=400,
-            detail=f"{label} must be {BCRYPT_MAX_BYTES} bytes or fewer.",
+            detail=f"{label} must be 72 bytes or fewer.",
         )
 
 
