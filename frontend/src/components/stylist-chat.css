@@ -1,3 +1,4 @@
+/* Purpose: not imported anywhere, candidate for removal */
 /* Fashion stylist chat. Scoped to .vsc and aligned with the dashboard palette
    (--ink #2b1930, --muted #806b82, --line #eadcea, dark button #321d38). */
 .vsc{--ink:#2b1930;--muted:#806b82;--line:#eadcea;--soft:#fbf7fc;--dark:#321d38;color:var(--ink);padding:10px 0 42px}

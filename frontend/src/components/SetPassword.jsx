@@ -1,3 +1,4 @@
+// Purpose: profile card to add an email/password login
 import { useState } from "react";
 
 const MAX_PASSWORD_BYTES = 72;

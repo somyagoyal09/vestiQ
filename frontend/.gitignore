@@ -1,3 +1,4 @@
+# Purpose: files Git must not track, such as node_modules and dist
 # Logs
 logs
 *.log

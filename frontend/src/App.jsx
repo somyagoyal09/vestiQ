@@ -1,3 +1,4 @@
+// Purpose: main app: sign-in, onboarding, dashboard, wardrobe, Style Me, outfits, profile
 // VESTIQ_DASHBOARD_MOOD_V2 — dashboard + daily mood only; authentication and landing preserved
 import { useEffect, useMemo, useRef, useState } from "react";
 import LandingPage from "./components/LandingPage";

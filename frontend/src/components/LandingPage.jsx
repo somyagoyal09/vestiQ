@@ -1,3 +1,4 @@
+// Purpose: landing page with navbar, hero and mobile menu
 import React, { useEffect, useState } from "react";
 import "./landing.css";
 import landingBg from "../assets/vestiq-landing-bg.png";

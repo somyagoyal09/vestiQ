@@ -1,3 +1,4 @@
+// Purpose: Mira chat window with quick replies and preferences panel
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./mira-chat.css";
 

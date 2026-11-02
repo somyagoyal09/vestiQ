@@ -1,3 +1,4 @@
+/* Purpose: Mira chat styles */
 /* MIRA chat - styles for StylistChat.jsx (replaces stylist-chat.css) */
 .vsc{display:flex;flex-direction:column;height:100%;min-height:0;font-family:"DM Sans",system-ui,sans-serif;color:#2b1930;font-size:14.5px;line-height:1.45}
 .vsc *{box-sizing:border-box}
