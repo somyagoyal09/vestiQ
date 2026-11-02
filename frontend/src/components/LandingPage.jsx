@@ -9,6 +9,7 @@ const sections = ["home", "features", "how", "about"];
 
 export default function LandingPage({ onEnter }) {
   const [activeSection, setActiveSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,6 +31,7 @@ export default function LandingPage({ onEnter }) {
   }, []);
 
   const scrollTo = (id) => {
+    setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -45,7 +47,20 @@ export default function LandingPage({ onEnter }) {
           <span className="vestiq-wordmark">vesti<span>Q</span><i>✿</i></span>
         </button>
 
-        <nav className="vestiq-nav-links" aria-label="Main navigation">
+        <button
+          className="vestiq-menu-toggle"
+          type="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="vestiq-mobile-menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav id="vestiq-mobile-menu" className={`vestiq-nav-links ${menuOpen ? "open" : ""}`} aria-label="Main navigation">
           <button className={`nav-link ${activeSection === "home" ? "active" : ""}`} onClick={() => scrollTo("home")}>Home</button>
           <button className={`nav-link ${activeSection === "features" ? "active" : ""}`} onClick={() => scrollTo("features")}>Features</button>
           <button className={`nav-link ${activeSection === "how" ? "active" : ""}`} onClick={() => scrollTo("how")}>How it works</button>

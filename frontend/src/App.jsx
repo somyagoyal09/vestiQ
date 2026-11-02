@@ -143,6 +143,29 @@ const normalizeOccasionTags = (value) => {
   return String(value || "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
 };
 
+const MAX_UPLOAD_SIDE = 1600;
+
+// Shrinks phone photos in the browser before upload, so large or HEIC-derived images
+// don't hit request size limits. Falls back to the original file if decoding fails.
+async function prepareImageForUpload(file) {
+  if (!file || !file.type?.startsWith("image/")) return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_UPLOAD_SIDE / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext("2d").drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close?.();
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.85));
+    if (!blob) return file;
+    const baseName = file.name.replace(/\.[^.]+$/, "") || "clothing";
+    return new File([blob], `${baseName}.jpg`, { type: "image/jpeg" });
+  } catch {
+    return file;
+  }
+}
+
 const displayLabel = (value) => String(value || "").replaceAll("_", " ").replace(/\b\w/g, (m) => m.toUpperCase());
 
 const emptySetup = {
@@ -253,6 +276,8 @@ function App() {
   const streamRef = useRef(null);
   const [clothingReviewOpen, setClothingReviewOpen] = useState(false);
   const [clothingReview, setClothingReview] = useState(null);
+  const [reviewError, setReviewError] = useState("");
+  const submittingRef = useRef(false);
 
   const nowHour = new Date().getHours();
   const greeting = nowHour >= 5 && nowHour < 12 ? "Good morning" : nowHour < 17 ? "Good afternoon" : nowHour < 21 ? "Good evening" : "Good night";
@@ -756,6 +781,7 @@ function App() {
       custom_occasion: "",
     });
     setClothingReviewOpen(true);
+    setReviewError("");
     setMessage("Choose the details for this clothing item before saving.");
   };
 
@@ -764,7 +790,7 @@ function App() {
   };
 
   const confirmClothingReview = async () => {
-    if (!token || !clothingReview) return;
+    if (submittingRef.current || !token || !clothingReview) return;
     const finalName = (clothingReview.name === "__other__" ? clothingReview.custom_name : clothingReview.name || "").trim();
     const finalDomain = (clothingReview.domain || "").trim();
     const finalCategory = (clothingReview.category === "__other__" ? clothingReview.custom_category : clothingReview.category || "").trim();
@@ -772,33 +798,45 @@ function App() {
     const finalStyle = (clothingReview.style === "__other__" ? clothingReview.custom_style : clothingReview.style || "").trim();
     const finalOccasions = normalizeOccasionTags(clothingReview.occasion_tags).map((x) => x === "__other__" ? String(clothingReview.custom_occasion || "").trim().toLowerCase() : x).filter(Boolean);
 
-    if (!finalName) return setMessage("Please enter a clothing name.");
-    if (!finalDomain) return setMessage("Please choose or enter a clothing domain.");
-    if (!finalCategory) return setMessage("Please choose or enter a clothing category.");
-    if (!finalColor) return setMessage("Please choose or enter the clothing colour.");
-    if (!finalOccasions.length) return setMessage("Please choose at least one occasion.");
+    if (!finalName) return setReviewError("Please enter a clothing name.");
+    if (!finalDomain) return setReviewError("Please choose or enter a clothing domain.");
+    if (!finalCategory) return setReviewError("Please choose or enter a clothing category.");
+    if (!finalColor) return setReviewError("Please choose or enter the clothing colour.");
+    if (!finalOccasions.length) return setReviewError("Please choose at least one occasion.");
 
-    const formData = new FormData();
-    formData.append("name", finalName);
-    formData.append("domain", finalDomain.toLowerCase());
-    formData.append("category", finalCategory.toLowerCase());
-    formData.append("color", finalColor.toLowerCase());
-    formData.append("style", finalStyle.toLowerCase());
-    formData.append("outfit_weight", clothingReview.outfit_weight || "");
-    formData.append("occasion_tags", finalOccasions.join(", "));
-    formData.append("image", clothingReview.image_file || image);
-
+    submittingRef.current = true;
     setBusy(true);
-    setMessage("Saving your confirmed wardrobe details...");
+    setReviewError("");
     try {
+      const imageFile = await prepareImageForUpload(clothingReview.image_file || image);
+
+      const formData = new FormData();
+      formData.append("name", finalName);
+      formData.append("domain", finalDomain.toLowerCase());
+      formData.append("category", finalCategory.toLowerCase());
+      formData.append("color", finalColor.toLowerCase());
+      formData.append("style", finalStyle.toLowerCase());
+      formData.append("outfit_weight", clothingReview.outfit_weight || "");
+      formData.append("occasion_tags", finalOccasions.join(", "));
+      formData.append("image", imageFile);
+
+      // No Content-Type header: the browser sets the multipart boundary itself.
       const response = await fetch(`${API_URL}/wardrobe/items`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
       });
-      const data = await response.json();
+
+      // Read as text first, so an HTML error page from a proxy doesn't break parsing.
+      const raw = await response.text();
+      let data = {};
+      try { data = raw ? JSON.parse(raw) : {}; } catch { data = {}; }
+
       if (!response.ok) {
-        setMessage(data.detail || "Unable to save clothing.");
+        const fallback = response.status === 413
+          ? "That photo is too large. Try a smaller image."
+          : `Could not save this item (HTTP ${response.status}). Please try again.`;
+        setReviewError(getErrorMessage(data, fallback));
         return;
       }
 
@@ -820,8 +858,9 @@ function App() {
       await loadWardrobe(true);
     } catch (error) {
       console.error(error);
-      setMessage("Unable to connect to backend.");
+      setReviewError("Network error while saving. Check your connection and try again.");
     } finally {
+      submittingRef.current = false;
       setBusy(false);
     }
   };
@@ -1358,7 +1397,7 @@ const getRecommendations = async (
       {token && <StyleBuddyLauncher visible={view === "style"} apiUrl={API_URL} token={token} userName={displayName || setupData.name} />}
 
       {moodOpen && <MoodModal current={dailyMood} onSelect={saveMood} onClose={() => setMoodOpen(false)} />}
-      {clothingReviewOpen && <ClothingReviewModal review={clothingReview} nameOptions={visibleReviewNameOptions} categoryOptions={visibleReviewCategoryOptions} onChange={updateClothingReview} onConfirm={confirmClothingReview} onCancel={cancelClothingReview} busy={busy} />}
+      {clothingReviewOpen && <ClothingReviewModal review={clothingReview} nameOptions={visibleReviewNameOptions} categoryOptions={visibleReviewCategoryOptions} onChange={updateClothingReview} onConfirm={confirmClothingReview} onCancel={cancelClothingReview} busy={busy} error={reviewError} />}
     </div>
   );
 }
@@ -1380,7 +1419,7 @@ function AuthPage({ mode, setMode, email, setEmail, password, setPassword, confi
   return (
     <div className="vestiq-auth-screen">
       <style>{`
-        .vestiq-auth-screen{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:32px;background-image:linear-gradient(rgba(255,244,251,.10),rgba(255,244,251,.10)),linear-gradient(rgba(40,19,48,.10),rgba(40,19,48,.10)),url(${authWardrobeBg});background-size:cover;background-position:center;background-repeat:no-repeat;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2b1930}
+        .vestiq-auth-screen{min-height:100vh;min-height:100dvh;height:auto;position:relative;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:72px 32px 32px;box-sizing:border-box;background-image:linear-gradient(rgba(255,244,251,.10),rgba(255,244,251,.10)),linear-gradient(rgba(40,19,48,.10),rgba(40,19,48,.10)),url(${authWardrobeBg});background-size:cover;background-position:center;background-repeat:no-repeat;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#2b1930}
         .vestiq-auth-screen:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.38),transparent 42%,rgba(255,255,255,.18));pointer-events:none}
         .auth-back{position:absolute;left:30px;top:24px;border:1px solid rgba(67,38,72,.12);background:rgba(255,255,255,.48);color:#4b3150;border-radius:999px;padding:10px 17px;font-weight:700;cursor:pointer;backdrop-filter:blur(14px);transition:.2s;z-index:3}.auth-back:hover{transform:translateX(-3px);background:rgba(255,255,255,.72)}
         .auth-room{display:none}.auth-closet{position:absolute;left:-4%;top:9%;width:44%;height:79%;border-radius:0 42px 42px 0;background:linear-gradient(90deg,#6b476e,#8f668f 48%,#62405f);box-shadow:inset -18px 0 50px rgba(28,10,31,.3),0 30px 90px rgba(74,37,75,.18)}
@@ -1390,10 +1429,10 @@ function AuthPage({ mode, setMode, email, setEmail, password, setPassword, confi
         .auth-rack{position:absolute;right:-2%;top:12%;width:34%;height:76%;border-radius:42px 0 0 42px;background:linear-gradient(135deg,#b8a0c9,#8d6c98);box-shadow:inset 20px 0 45px rgba(255,255,255,.14),0 30px 90px rgba(69,39,75,.16)}.auth-rack:before{content:"";position:absolute;left:12%;right:12%;top:17%;height:6px;border-radius:20px;background:#f5d9e9;box-shadow:0 180px 0 #f5d9e9,0 360px 0 #f5d9e9;opacity:.8}.auth-polaroids{position:absolute;right:7%;top:22%;display:flex;flex-direction:column;gap:18px}.auth-polaroids span{width:100px;height:82px;background:#fff9fc;border:6px solid #fff9fc;box-shadow:0 12px 22px rgba(54,27,59,.15);transform:rotate(4deg)}.auth-polaroids span:nth-child(2){transform:rotate(-5deg);margin-left:35px}.auth-polaroids span:before{content:"";display:block;height:100%;background:linear-gradient(135deg,#e7bddb,#b59acb)}
         .auth-card{position:relative;z-index:2;width:min(920px,92vw);min-height:540px;display:grid;grid-template-columns:1.02fr .98fr;border:1px solid rgba(255,255,255,.62);border-radius:34px;overflow:hidden;background:rgba(43,24,48,.18);box-shadow:0 30px 90px rgba(58,29,63,.22);backdrop-filter:blur(18px)}
         .auth-copy{padding:46px 42px;color:white;background:linear-gradient(145deg,rgba(50,26,55,.74),rgba(92,52,98,.50));position:relative}.auth-kicker{font-size:11px;letter-spacing:4px;font-weight:800;color:#e8a8dc;margin-bottom:18px}.auth-copy h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(36px,4vw,56px);line-height:.98;margin:0 0 18px;letter-spacing:-2px}.auth-copy h1 em{color:#edafd9;font-style:italic}.auth-copy p{max-width:420px;color:#f0e2ef;font-size:14.5px;line-height:1.6;margin-bottom:24px}.auth-pills{display:flex;flex-wrap:wrap;gap:10px}.auth-pill{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);padding:11px 15px;border-radius:999px;color:#fff;font-size:13px;font-weight:700}.auth-quote{position:absolute;left:42px;bottom:28px;color:#f1d9ed;font-size:14px;font-weight:600;letter-spacing:.2px;line-height:1.5;transition:transform .22s ease,font-size .22s ease,font-weight .22s ease,color .22s ease;text-shadow:0 2px 14px rgba(20,7,24,.25)}.auth-quote:hover{transform:translateY(-2px);font-size:15px;font-weight:800;color:#fff2fb}
-        .auth-form{background:rgba(255,253,255,.97);padding:38px 40px;display:flex;flex-direction:column;justify-content:center}.auth-brand-logo-text{display:inline-flex;align-items:flex-start;justify-content:center;align-self:center;width:max-content;color:#fff;font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-size:48px;line-height:.92;letter-spacing:-2.5px;font-weight:800;text-shadow:0 2px 10px rgba(55,26,60,.20);cursor:default;transition:transform .22s ease,text-shadow .22s ease}.auth-brand-logo-text > span{color:#fff}.auth-brand-logo-text > em{color:#e6b9ff;font-style:italic;font-weight:800}.auth-brand-logo-text > i{color:#f1a9d1;font-style:normal;font-size:19px;line-height:1;margin-left:2px;vertical-align:top}.auth-brand-logo-text:hover{transform:scale(1.045);text-shadow:0 0 20px rgba(235,188,255,.72),0 3px 12px rgba(55,26,60,.24)}.auth-tagline{text-align:center;color:#8b718c;font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;margin-bottom:20px}.app-wordmark-button{display:flex;align-items:center;background:#321b38!important;border-radius:12px;padding:5px 10px!important;box-shadow:0 8px 18px rgba(50,27,56,.12)}.app-wordmark{display:block;width:108px;height:auto;object-fit:contain}.setup-wordmark{width:112px;background:#321b38;border-radius:12px;padding:5px 10px;box-sizing:content-box}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:#f0e5f0;padding:4px;border-radius:999px;margin-bottom:20px}.auth-tab{border:0;background:transparent;border-radius:999px;padding:12px;font-weight:800;color:#7d657f;cursor:pointer}.auth-tab.active{background:#321b38;color:white;box-shadow:0 8px 18px rgba(50,27,56,.18)}.auth-heading{font-family:Georgia,"Times New Roman",serif;font-size:28px;font-weight:500;margin:0 0 8px;color:#2b1930}.auth-subheading{color:#826c83;font-size:14px;line-height:1.5;margin:0 0 20px}.auth-input-wrap{position:relative;margin-bottom:12px}.auth-input{width:100%;box-sizing:border-box;border:1px solid #ead8e9;background:#fff;border-radius:14px;padding:13px 15px 13px 42px;outline:none;color:#2b1930;transition:.2s}.auth-input:focus{border-color:#c58bcf;box-shadow:0 0 0 4px rgba(197,139,207,.12)}.auth-input-icon{position:absolute;left:15px;top:12px;color:#9b7c9c;font-size:15px}.auth-password-toggle{position:absolute;right:10px;top:8px;border:0;background:transparent;color:#8c6d8e;cursor:pointer;padding:7px}.auth-main-button{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(100deg,#e69bd8,#bca3ef);color:#24162a;font-weight:900;cursor:pointer;box-shadow:0 12px 24px rgba(184,142,213,.25);transition:.2s;margin-top:6px}.auth-main-button:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(184,142,213,.32)}.auth-main-button:disabled{opacity:.65;cursor:not-allowed;transform:none}.auth-divider{display:flex;align-items:center;gap:12px;color:#a58ba5;font-size:12px;margin:22px 0 14px}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#eadce9;flex:1}.auth-socials{display:grid;grid-template-columns:1fr;gap:10px}.auth-social{border:1px solid #e4d5e4;background:#fff;border-radius:13px;padding:12px 10px;font-weight:800;color:#49334d;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}.auth-social:hover{transform:translateY(-1px);background:#fff8ff;box-shadow:0 8px 18px rgba(60,30,64,.08)}.google-logo{width:18px;height:18px;display:block;flex:none}.auth-foot{margin-top:20px;text-align:center;color:#9a849a;font-size:12px;line-height:1.5}.auth-slogan{margin-top:18px;text-align:center;color:#9a779b;font-size:12px;min-height:18px;transition:.25s}.auth-message{margin-top:13px;padding:10px 12px;border-radius:11px;background:#f7edf6;color:#634c66;font-size:12px}.auth-message.success{background:#eaf7ef;color:#2f6d4c}
+        .auth-form{background:rgba(255,253,255,.97);padding:38px 40px;display:flex;flex-direction:column;justify-content:center}.auth-brand-logo-text{display:inline-flex;align-items:flex-start;justify-content:center;align-self:center;width:max-content;color:#321b38;font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-size:48px;line-height:.92;letter-spacing:-2.5px;font-weight:800;text-shadow:none;cursor:default;transition:transform .22s ease,text-shadow .22s ease}.auth-brand-logo-text > span{color:#321b38}.auth-brand-logo-text > em{color:#b56fc4;font-style:italic;font-weight:800}.auth-brand-logo-text > i{color:#d46fa8;font-style:normal;font-size:19px;line-height:1;margin-left:2px;vertical-align:top}.auth-brand-logo-text:hover{transform:scale(1.045);text-shadow:0 0 20px rgba(235,188,255,.72),0 3px 12px rgba(55,26,60,.24)}.auth-tagline{text-align:center;color:#8b718c;font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;margin-bottom:20px}.app-wordmark-button{display:flex;align-items:center;background:#321b38!important;border-radius:12px;padding:5px 10px!important;box-shadow:0 8px 18px rgba(50,27,56,.12)}.app-wordmark{display:block;width:108px;height:auto;object-fit:contain}.setup-wordmark{width:112px;background:#321b38;border-radius:12px;padding:5px 10px;box-sizing:content-box}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:#f0e5f0;padding:4px;border-radius:999px;margin-bottom:20px}.auth-tab{border:0;background:transparent;border-radius:999px;padding:12px;font-weight:800;color:#7d657f;cursor:pointer}.auth-tab.active{background:#321b38;color:white;box-shadow:0 8px 18px rgba(50,27,56,.18)}.auth-heading{font-family:Georgia,"Times New Roman",serif;font-size:28px;font-weight:500;margin:0 0 8px;color:#2b1930}.auth-subheading{color:#826c83;font-size:14px;line-height:1.5;margin:0 0 20px}.auth-input-wrap{position:relative;margin-bottom:12px}.auth-input{width:100%;box-sizing:border-box;border:1px solid #ead8e9;background:#fff;border-radius:14px;padding:13px 15px 13px 42px;outline:none;color:#2b1930;transition:.2s}.auth-input:focus{border-color:#c58bcf;box-shadow:0 0 0 4px rgba(197,139,207,.12)}.auth-input-icon{position:absolute;left:15px;top:12px;color:#9b7c9c;font-size:15px}.auth-password-toggle{position:absolute;right:10px;top:8px;border:0;background:transparent;color:#8c6d8e;cursor:pointer;padding:7px}.auth-main-button{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(100deg,#e69bd8,#bca3ef);color:#24162a;font-weight:900;cursor:pointer;box-shadow:0 12px 24px rgba(184,142,213,.25);transition:.2s;margin-top:6px}.auth-main-button:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(184,142,213,.32)}.auth-main-button:disabled{opacity:.65;cursor:not-allowed;transform:none}.auth-divider{display:flex;align-items:center;gap:12px;color:#a58ba5;font-size:12px;margin:22px 0 14px}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#eadce9;flex:1}.auth-socials{display:grid;grid-template-columns:1fr;gap:10px}.auth-social{border:1px solid #e4d5e4;background:#fff;border-radius:13px;padding:12px 10px;font-weight:800;color:#49334d;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}.auth-social:hover{transform:translateY(-1px);background:#fff8ff;box-shadow:0 8px 18px rgba(60,30,64,.08)}.google-logo{width:18px;height:18px;display:block;flex:none}.auth-foot{margin-top:20px;text-align:center;color:#9a849a;font-size:12px;line-height:1.5}.auth-slogan{margin-top:18px;text-align:center;color:#9a779b;font-size:12px;min-height:18px;transition:.25s}.auth-message{margin-top:13px;padding:10px 12px;border-radius:11px;background:#f7edf6;color:#634c66;font-size:12px}.auth-message.success{background:#eaf7ef;color:#2f6d4c}
         .duplicate-overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(40,20,45,.38);backdrop-filter:blur(8px)}.duplicate-modal{width:min(420px,100%);padding:30px 28px 26px;border:1px solid rgba(255,255,255,.72);border-radius:24px;background:rgba(255,250,255,.98);box-shadow:0 24px 70px rgba(45,20,55,.25);text-align:center;color:#38243d}.duplicate-icon{width:44px;height:44px;margin:0 auto 14px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e6a0d7,#b99cf0);color:#fff;font-size:20px;box-shadow:0 10px 24px rgba(173,111,181,.22)}.duplicate-modal h3{margin:0;font-family:Georgia,serif;font-size:25px;line-height:1.2}.duplicate-modal p{margin:10px auto 20px;max-width:330px;color:#76627b;font-size:13px;line-height:1.6}.duplicate-primary,.duplicate-secondary{width:100%;border-radius:13px;padding:12px 14px;font-weight:800;cursor:pointer}.duplicate-primary{border:0;background:linear-gradient(90deg,#df91d4,#b99aec);color:#24152a;box-shadow:0 10px 24px rgba(169,117,185,.18)}.duplicate-secondary{margin-top:8px;border:1px solid #e3d6e4;background:#fff;color:#6b5570}.duplicate-primary:hover,.duplicate-secondary:hover{transform:translateY(-1px)}
         @media(max-width:900px){.auth-card{grid-template-columns:1fr;max-width:620px}.auth-copy{display:none}.auth-form{padding:42px 30px}.auth-back{left:18px;top:16px}.auth-closet,.auth-rack{opacity:.45}.auth-socials{grid-template-columns:1fr}}
-        @media(max-width:520px){.vestiq-auth-screen{padding:18px}.auth-form{padding:34px 20px}.auth-card{border-radius:24px}.auth-heading{font-size:28px}}
+        @media(max-width:520px){.vestiq-auth-screen{padding:64px 18px 24px}.auth-form{padding:34px 20px}.auth-card{border-radius:24px}.auth-heading{font-size:28px}}
       `}</style>
 
       <button className="auth-back" onClick={onBack}>← Back to Vestiq</button>
@@ -2088,7 +2127,7 @@ function ProfileView({ displayName, setupData, setSetupData, onReopenSetup, dail
   </>;
 }
 
-function ClothingReviewModal({ review, onChange, onConfirm, onCancel, busy, nameOptions, categoryOptions }) {
+function ClothingReviewModal({ review, onChange, onConfirm, onCancel, busy, nameOptions, categoryOptions, error }) {
   if (!review) return null;
   const selectedOccasions = normalizeOccasionTags(review.occasion_tags);
   const toggleOccasion = (value) => {
@@ -2128,6 +2167,7 @@ function ClothingReviewModal({ review, onChange, onConfirm, onCancel, busy, name
             </div>
           </div>
         </div>
+        {error && <div className="vd-review-warning" role="alert">{error}</div>}
         <div className="vd-review-footer"><button className="btn btn-outline-secondary" onClick={onCancel} disabled={busy}>Cancel</button><button className="btn btn-dark" onClick={onConfirm} disabled={busy}>{busy ? "Saving..." : "Confirm & Add to Wardrobe"}</button></div>
       </div>
     </div>
