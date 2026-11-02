@@ -1,3 +1,4 @@
+# Purpose: files Git must not track
 # Python environments/cache
 .venv-ai/
 .venv/
