@@ -62,7 +62,8 @@ def _set_oauth_state(response: RedirectResponse, state: str) -> None:
         key="vestiq_oauth_state",
         value=state,
         httponly=True,
-        secure=False,
+        secure=True,
+        path="/",
         samesite="lax",
         max_age=600,
     )
