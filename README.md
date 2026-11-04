@@ -30,6 +30,46 @@
 
 **VestiQ** is an intelligent wardrobe and outfit recommendation app. Add your clothes once, and get outfit combinations based on weather, occasion, and style. 🌸
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/landing_page.png" alt="VestiQ Landing Page" width="85%">
+</p>
+
+<details>
+  <summary><strong>View More Screenshots</strong></summary>
+  <br>
+
+  <p align="center">
+    <img src="screenshots/login_page.png" alt="Login Page" width="85%">
+  </p>
+
+  <p align="center">
+    <img src="screenshots/create_account.png" alt="Create Account Page" width="85%">
+  </p>
+
+  <p align="center">
+    <img src="screenshots/home_page.png" alt="Home Page" width="85%">
+  </p>
+
+  <p align="center">
+    <img src="screenshots/my_wardrobe.png" alt="My Wardrobe" width="85%">
+  </p>
+
+  <p align="center">
+    <img src="screenshots/style_me.png" alt="Style Me" width="85%">
+  </p>
+
+  <p align="center">
+    <img src="screenshots/mira_AI_chatbot.png" alt="Mira AI Chatbot" width="85%">
+  </p>
+
+  <p align="center">
+    <img src="screenshots/outfit_recommendation.png" alt="Outfit Recommendations" width="85%">
+  </p>
+
+</details>
+
 ## 🌿 Architecture Overview
 
 ```text
