@@ -30,7 +30,7 @@
 
 **VestiQ** is an intelligent wardrobe and outfit recommendation app. Add your clothes once, and get outfit combinations based on weather, occasion, and style. 🌸
 
-## Screenshots
+## 📸 Screenshots
 
 <p align="center">
   <img src="screenshots/landing_page.png" alt="VestiQ Landing Page" width="85%">
@@ -67,7 +67,6 @@
   <p align="center">
     <img src="screenshots/outfit_recommendation.png" alt="Outfit Recommendations" width="85%">
   </p>
-
 </details>
 
 ## 🌿 Architecture Overview
